@@ -6,14 +6,14 @@
  * |                           修改前请联系维护者。                          |
  * +-------------------------------------------------------------------------+
  *
- * 从Github导入[https://github.com/jimmyxu/twinkle]
+ * 从Github导入[https://github.com/zhuyifei1999/twinkle]
  *
  * ----------
  *
  * 这是Twinkle，新手、管理员及他们之间的用户的
- * 好搭档。请参见[[WP:TW]]以获取更多信息。
+ * 好搭档。请参见[[WV:TW]]以获取更多信息。
  *
- * 维护者：~~~
+ * 维护者：[[User:Zhuyifei1999|Zhuyifei1999]] ([[User talk:Zhuyifei1999#top|talk]])
  */
 
 //<nowiki>
@@ -43,9 +43,9 @@ Twinkle.defaultConfig = {};
  */
 Twinkle.defaultConfig.twinkle = {
 	 // General
-	summaryAd: " ([[WP:TW|TW]])",
-	deletionSummaryAd: " ([[WP:TW|TW]])",
-	protectionSummaryAd: " ([[WP:TW|TW]])",
+	summaryAd: " ([[WV:TW|TW]])",
+	deletionSummaryAd: " ([[WV:TW|TW]])",
+	protectionSummaryAd: " ([[WV:TW|TW]])",
 	userTalkPageMode: "window",
 	dialogLargeFont: false,
 	 // Fluff (revert and rollback)
@@ -65,8 +65,8 @@ Twinkle.defaultConfig.twinkle = {
 	watchSpeedyPages: [ ],
 	markSpeedyPagesAsPatrolled: true,
 	// these next two should probably be identical by default
-	notifyUserOnSpeedyDeletionNomination: [ "db", "g1", "g2", "g3", "g5", "g11", "g12", "g13", "g16", "a1", "a2", "a5", "f6", "r2", "r3" ],
-	welcomeUserOnSpeedyDeletionNotification: [ "db", "g1", "g2", "g3", "g5", "g11", "g12", "g13", "g16", "a1", "a2", "a5", "f6", "r2", "r3" ],
+	notifyUserOnSpeedyDeletionNomination: [ "db" ],
+	welcomeUserOnSpeedyDeletionNotification: [ "db" ],
 	promptForSpeedyDeletionSummary: [ "db" ],
 	openUserTalkPageOnSpeedyDelete: [  ],
 	deleteTalkPageOnDelete: false,
@@ -75,8 +75,8 @@ Twinkle.defaultConfig.twinkle = {
 	speedyWindowHeight: 500,
 	speedyWindowWidth: 800,
 	logSpeedyNominations: false,
-	speedyLogPageName: "CSD日志",
-	noLogOnSpeedyNomination: [ "o1" ],
+	speedyLogPageName: "快速删除日志",
+	noLogOnSpeedyNomination: [],
 	enlargeG11Input: true,
 	 // Unlink
 	unlinkNamespaces: [ "0", "10", "100", "118" ],
@@ -126,13 +126,23 @@ if ( mw.config.get( "skin" ) === "vector" ) {
 
 Twinkle.defaultConfig.friendly = {
 	 // Tag
-	groupByDefault: true,
+	//groupByDefault: true,
 	watchTaggedPages: false,
 	watchMergeDiscussions: false,
 	markTaggedPagesAsMinor: false,
 	markTaggedPagesAsPatrolled: true,
 	tagArticleSortOrder: "cat",
 	customTagList: [],
+	 // Welcome
+	topWelcomes: true,
+	watchWelcomes: false,
+	welcomeHeading: "欢迎",
+	insertHeadings: true,
+	insertUsername: false,
+	insertSignature: true,  // sign welcome templates, where appropriate
+	quickWelcomeMode: "norm",
+	quickWelcomeTemplate: "welcome",
+	customWelcomeList: [],
 	 // Talkback
 	markTalkbackAsMinor: true,
 	insertTalkbackSignature: true,  // always sign talkback templates
@@ -257,11 +267,6 @@ Twinkle.addPortlet = function( navigation, id, text, type, nextnodeid )
 	var outerDiv = document.createElement( "div" );
 	outerDiv.className = outerDivClass + " emptyPortlet";
 	outerDiv.id = id;
-	if ( type === "menu" ) {
-		// Fix drop-down arrow image in Vector skin
-		outerDiv.style.backgroundImage = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAQCAMAAAAlM38UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9QTFRFsbGxmpqa3d3deXl58/n79CzHcQAAAAV0Uk5T/////wD7tg5TAAAAMklEQVR42mJgwQoYBkqYiZEZAhiZUFRDxWGicEPA4nBRhNlAcYQokpVMDEwD6kuAAAMAyGMFQVv5ldcAAAAASUVORK5CYII=")';
-		outerDiv.style.backgroundPosition = "right 60%";
-	}
 	if ( nextnode && nextnode.parentNode === root ) {
 		root.insertBefore( outerDiv, nextnode );
 	} else {
@@ -401,16 +406,13 @@ Twinkle.load = function () {
 
 	// Load the modules in the order that the tabs should appears
 	// User/user talk-related
-	Twinkle.warn();
-	// Twinkle.shared();
+	Twinkle.welcome();
 	Twinkle.talkback();
 	// Deletion
 	Twinkle.speedy();
 	Twinkle.copyvio();
 	Twinkle.xfd();
-	Twinkle.image();
 	// Maintenance
-	Twinkle.protect();
 	Twinkle.tag();
 	// Misc. ones last
 	Twinkle.diff();
@@ -418,9 +420,6 @@ Twinkle.load = function () {
 	Twinkle.config.init();
 	Twinkle.fluff.init();
 	if ( Morebits.userIsInGroup('sysop') ) {
-		Twinkle.delimages();
-		Twinkle.batchdelete();
-		Twinkle.batchundelete();
 		Twinkle.close();
 	}
 	// Run the initialization callbacks for any custom modules

@@ -41,7 +41,7 @@ Twinkle.unlink.callback = function(presetReason) {
 	var Window = new Morebits.simpleWindow( 600, 440 );
 	Window.setTitle( "取消链入" + (mw.config.get('wgNamespaceNumber') === 6 ? "和文件使用" : "") );
 	Window.setScriptName( "Twinkle" );
-	Window.addFooterLink( "Twinkle帮助", "WP:TW/DOC#unlink" );
+	Window.addFooterLink( "Twinkle帮助", "w:WP:TW/DOC#unlink" );
 
 	var form = new Morebits.quickForm( Twinkle.unlink.callback.evaluate );
 
@@ -191,7 +191,7 @@ Twinkle.unlink.callbacks = {
 					apiobj.params.form.append( {
 						type: 'div',
 						label: "已选择的名字空间：" + namespaces.join(', '),
-						tooltip: "您可在Twinkle属性中更改这个，请参见[[WP:TWPREFS]]"
+						tooltip: "您可在Twinkle属性中更改这个，请参见[[WV:TWPREFS]]"
 					});
 					if ($(xmlDoc).find('query-continue').length) {
 						apiobj.params.form.append( {
@@ -237,7 +237,7 @@ Twinkle.unlink.callbacks = {
 				apiobj.params.form.append( {
 					type: 'div',
 					label: "已选择的名字空间：" + namespaces.join(', '),
-					tooltip: "您可在Twinkle属性中更改这个，请参见[[WP:TWPREFS]]"
+					tooltip: "您可在Twinkle属性中更改这个，请参见[[WV:TWPREFS]]"
 				});
 				if ($(xmlDoc).find('query-continue').length) {
 					apiobj.params.form.append( {

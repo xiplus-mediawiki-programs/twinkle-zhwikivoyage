@@ -5,7 +5,7 @@ Twinkle是维基人用于快速执行常见维护工作（如提交删除候选�
 
 它构建于已被许多维基百科脚本和编辑工具使用的`morebits.js`库之上。
 
-查看中文维基百科上的[Wikipedia:Twinkle][]以获取更多信息。
+查看中文维基导游上的[Wikivoyage:Twinkle][]以获取更多信息。
 
 [AzaToth][]是本工具和`morebits.js`库的的最初作者和维护者。
 
@@ -16,14 +16,14 @@ Twinkle是维基人用于快速执行常见维护工作（如提交删除候选�
 * `morebits.css`：`morebits.js`所附带的样式表。在Modern皮肤中应用的一些样式是Twinkle特有的，或许这些应该被放进`twinkle.css`里。
 * `sync.pl`：用来更新维基上小工具、或用维基上的修改更新此代码库的Perl脚本。参见下方的完整文档。
 * `twinkle.js`：通用的Twinkle特有代码，大部分用于处理参数设置和在UI中显示Twinkle。此外，这个文件包含了Twinkle的默认参数。
-* `modules`：包含了单个Twinkle模块。相关说明可在头部注释或[Twinkle文档][]中找到。模块`twinkleconfig.js`用于提供[Twinkle参数设置][WP:TWPREFS]。
+* `modules`：包含了单个Twinkle模块。相关说明可在头部注释或[Twinkle文档][]中找到。模块`twinkleconfig.js`用于提供[Twinkle参数设置][WV:TWPREFS]。
 
 其他没有提到的文件大概已经过时了。
 
-更新Wikipedia上的脚本
+更新Wikivoyage上的脚本
 ---------------------
 
-有两种方式将Twinkle脚本上传到维基百科或其他地方。
+有两种方式将Twinkle脚本上传到维基导游或其他地方。
 
 ### 手工拼接
 
@@ -41,7 +41,7 @@ Twinkle是维基人用于快速执行常见维护工作（如提交删除候选�
 
 ### 使用`sync.pl`同步
 
-存在一个名为`sync.pl`的同步脚本，可用于向维基百科上拉取和推送文件。
+存在一个名为`sync.pl`的同步脚本，可用于向维基导游上拉取和推送文件。
 
 这个程序依赖于Perl 5.10和模块[`Git::Repository`][Git::Repository]与[`MediaWiki::Bot`][MediaWiki::Bot]，可轻易用[`App::cpanminus`][App::cpanminus]安装：
 
@@ -81,14 +81,14 @@ Twinkle是维基人用于快速执行常见维护工作（如提交删除候选�
 
 无需多言，例外也是存在的。这主要和括号旁的空白有关：旧Twinkle代码看起来像`if ( condition ) {`，但新代码一般会用`if (condition) {`。惯例是跟随周围代码的样式。
 
-[Wikipedia:Twinkle]: https://zh.wikipedia.org/wiki/Wikipedia:Twinkle
+[Wikivoyage:Twinkle]: https://zh.wikivoyage.org/wiki/Wikivoyage:Twinkle
 [AzaToth]: https://en.wikipedia.org/wiki/User:AzaToth
-[Twinkle文档]: https://zh.wikipedia.org/wiki/Help:Twinkle
-[WP:TWPREFS]: https://zh.wikipedia.org/wiki/WP:TWPREFS
-[MediaWiki:Gadget-Twinkle.js]: https://zh.wikipedia.org/wiki/MediaWiki:Gadget-Twinkle.js
-[MediaWiki:Gadget-morebits.js]: https://zh.wikipedia.org/wiki/MediaWiki:Gadget-morebits.js
-[MediaWiki:Gadget-morebits.css]: https://zh.wikipedia.org/wiki/MediaWiki:Gadget-morebits.css
-[MediaWiki:Gadgets-definition]: https://zh.wikipedia.org/wiki/MediaWiki:Gadgets-definition
+[Twinkle文档]: https://zh.wikivoyage.org/wiki/Help:Twinkle
+[WV:TWPREFS]: https://zh.wikivoyage.org/wiki/WV:TWPREFS
+[MediaWiki:Gadget-Twinkle.js]: https://zh.wikivoyage.org/wiki/MediaWiki:Gadget-Twinkle.js
+[MediaWiki:Gadget-morebits.js]: https://zh.wikivoyage.org/wiki/MediaWiki:Gadget-morebits.js
+[MediaWiki:Gadget-morebits.css]: https://zh.wikivoyage.org/wiki/MediaWiki:Gadget-morebits.css
+[MediaWiki:Gadgets-definition]: https://zh.wikivoyage.org/wiki/MediaWiki:Gadgets-definition
 [Git::Repository]: http://search.cpan.org/perldoc?Git%3A%3ARepository
 [MediaWiki::Bot]: http://search.cpan.org/perldoc?MediaWiki%3A%3ABot
 [App::cpanminus]: http://search.cpan.org/perldoc?App%3A%3Acpanminus

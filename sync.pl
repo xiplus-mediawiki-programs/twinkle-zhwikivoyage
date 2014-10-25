@@ -14,18 +14,18 @@ my $c = {do "$config_file"} if -f $config_file;
 
 my ($opt, $usage) = describe_options(
     "$0 %o <files...>",
-    [ 'username|u=s', "username for account on wikipedia", {default => $c->{username} // ""} ],
-    [ 'password|p=s', "password for account on wikipedia (do not use)", {default => $c->{password} // ""} ],
-    [ 'base|b=s', "base location on wikipedia where files exist (default User:AzaToth or entry in .mwbotrc)", {default => $c->{base} // "User:Jimmy_xu_wrk/Twinkle"} ],
+    [ 'username|u=s', "username for account on wikivoyage", {default => $c->{username} // ""} ],
+    [ 'password|p=s', "password for account on wikivoyage (do not use)", {default => $c->{password} // ""} ],
+    [ 'base|b=s', "base location on wikivoyage where files exist (default User:AzaToth or entry in .mwbotrc)", {default => $c->{base} // "User:Zhuyifei1999/Twinkle"} ],
     [ 'lang=s', 'Target language', {default => 'zh'} ],
-    [ 'family=s', 'Target family', {default => 'wikipedia'} ],
+    [ 'family=s', 'Target family', {default => 'wikivoyage'} ],
     [ 'mode' => hidden =>
         {
             required => 1,
             one_of => [
-                ["pull" => "pull changes from wikipedia"],
-                ["push" => "push changes to wikipedia"],
-                ["deploy" => "push changes to wikipedia as gadgets"]
+                ["pull" => "pull changes from wikivoyage"],
+                ["push" => "push changes to wikivoyage"],
+                ["deploy" => "push changes to wikivoyage as gadgets"]
             ] 
         } 
     ],
@@ -43,22 +43,15 @@ my %deploys = (
 	'twinkle.js' => 'MediaWiki:Gadget-Twinkle.js',
 	'morebits.js' => 'MediaWiki:Gadget-morebits.js',
 	'morebits.css' => 'MediaWiki:Gadget-morebits.css',
-	'modules/friendlyshared.js' => 'MediaWiki:Gadget-friendlyshared.js',
 	'modules/friendlytag.js' => 'MediaWiki:Gadget-friendlytag.js',
 	'modules/friendlytalkback.js' => 'MediaWiki:Gadget-friendlytalkback.js',
-	'modules/twinklebatchdelete.js' => 'MediaWiki:Gadget-twinklebatchdelete.js',
-	'modules/twinklebatchundelete.js' => 'MediaWiki:Gadget-twinklebatchundelete.js',
 	'modules/twinkleclose.js' => 'MediaWiki:Gadget-twinkleclose.js',
 	'modules/twinkleconfig.js' => 'MediaWiki:Gadget-twinkleconfig.js',
 	'modules/twinklecopyvio.js' => 'MediaWiki:Gadget-twinklecopyvio.js',
-	'modules/twinkledelimages.js' => 'MediaWiki:Gadget-twinkledelimages.js',
 	'modules/twinklediff.js' => 'MediaWiki:Gadget-twinklediff.js',
 	'modules/twinklefluff.js' => 'MediaWiki:Gadget-twinklefluff.js',
-	'modules/twinkleimage.js' => 'MediaWiki:Gadget-twinkleimage.js',
-	'modules/twinkleprotect.js' => 'MediaWiki:Gadget-twinkleprotect.js',
 	'modules/twinklespeedy.js' => 'MediaWiki:Gadget-twinklespeedy.js',
 	'modules/twinkleunlink.js' => 'MediaWiki:Gadget-twinkleunlink.js',
-	'modules/twinklewarn.js' => 'MediaWiki:Gadget-twinklewarn.js',
 	'modules/twinklexfd.js' => 'MediaWiki:Gadget-twinklexfd.js',
 );
 

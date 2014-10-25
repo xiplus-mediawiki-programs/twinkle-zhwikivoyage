@@ -30,60 +30,30 @@ Twinkle.config.commonEnums = {
 
 Twinkle.config.commonSets = {
 	csdCriteria: {
-		db: "自定义理由",
-		g1: "G1", g2: "G2", g3: "G3", g5: "G5", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14", g15: "G15", g16: "G16",
-		a1: "A1", a2: "A2", a3: "A3", a5: "A5",
-		o1: "O1", o3: "O3", o4: "O4",
-		f1: "F1", f3: "F3", f4: "F4", f5: "F5", f6: "F6", f7: "F7",
-		r2: "R2", r3: "R3", r5: "R5"
+		db: "自定义理由"
 	},
 	csdCriteriaDisplayOrder: [
-		"db",
-		"g1", "g2", "g3", "g5", "g10", "g11", "g12", "g13", "g14", "g15", "g16",
-		"a1", "a2", "a3", "a5",
-		"o1", "o3", "o4",
-		"f1", "f3", "f4", "f5", "f6", "f7",
-		"r2", "r3", "r5"
+		"db"
 	],
 	csdCriteriaNotification: {
-		db: "自定义理由",
-		g1: "G1", g2: "G2", g3: "G3", g5: "G5", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14", g15: "G15", g16: "G16",
-		a1: "A1", a2: "A2", a3: "A3", a5: "A5",
-		o1: "O1", o3: "O3", o4: "O4",
-		f1: "F1", f3: "F3", f4: "F4", f5: "F5", f6: "F6", f7: "F7",
-		r2: "R2", r3: "R3", r5: "R5"
+		db: "自定义理由"
 	},
 	csdCriteriaNotificationDisplayOrder: [
-		"db",
-		"g1", "g2", "g3", "g5", "g10", "g11", "g12", "g13", "g14", "g15", "g16",
-		"a1", "a2", "a3", "a5",
-		"o1", "o3", "o4",
-		"f1", "f3", "f4", "f5", "f6", "f7",
-		"r2", "r3", "r5"
+		"db"
 	],
 	csdAndDICriteria: {
-		db: "自定义理由",
-		g1: "G1", g2: "G2", g3: "G3", g5: "G5", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14", g15: "G15", g16: "G16",
-		a1: "A1", a2: "A2", a3: "A3", a5: "A5",
-		o1: "O1", o3: "O3", o4: "O4",
-		f1: "F1", f3: "F3", f4: "F4", f5: "F5", f6: "F6", f7: "F7",
-		r2: "R2", r3: "R3", r5: "R5"
+		db: "自定义理由"
 	},
 	csdAndDICriteriaDisplayOrder: [
-		"db",
-		"g1", "g2", "g3", "g5", "g10", "g11", "g12", "g13", "g14", "g15", "g16",
-		"a1", "a2", "a3", "a5",
-		"o1", "o3", "o4",
-		"f1", "f3", "f4", "f5", "f6", "f7",
-		"r2", "r3", "r5"
+		"db"
 	],
 	namespacesNoSpecial: {
 		"0": "（条目）",
 		"1": "Talk",
 		"2": "User",
 		"3": "User talk",
-		"4": "Wikipedia",
-		"5": "Wikipedia talk",
+		"4": "Wikivoyage",
+		"5": "Wikivoyage talk",
 		"6": "File",
 		"7": "File talk",
 		"8": "MediaWiki",
@@ -461,11 +431,6 @@ Twinkle.config.sections = [
 			type: "boolean"
 		},
 		{
-			name: "groupByDefault",
-			label: "默认勾选“合并到{{multiple issues}}”复选框",
-			type: "boolean"
-		},
-		{
 			name: "tagArticleSortOrder",
 			label: "条目标记的默认察看方式",
 			type: "enum",
@@ -584,7 +549,51 @@ Twinkle.config.sections = [
 },
 
 {
-	title: "存废讨论",
+	title: "欢迎用户",
+	inFriendlyConfig: true,
+	preferences: [
+		{
+			name: "topWelcomes",
+			label: "将欢迎置于对话页最顶",
+			type: "boolean"
+		},
+		{
+			name: "watchWelcomes",
+			label: "欢迎时添加用户对话页到监视列表",
+			helptip: "您将可以更好地帮助他。",
+			type: "boolean"
+		},
+		{
+			name: "insertUsername",
+			label: "添加您的用户名到模板（如适用）",
+			type: "boolean"
+		},
+		{
+			name: "quickWelcomeMode",
+			label: "点击差异上的“欢迎”链接会",
+			helptip: "如果您选择自动欢迎，您选择的模板将会被使用。",
+			type: "enum",
+			enumValues: { auto: "自动欢迎", norm: "提示您选择一个模板" }
+		},
+		{
+			name: "quickWelcomeTemplate",
+			label: "自动欢迎时所用的模板",
+			helptip: "输入模板名，不带大括号，条目名将会被当作参数。",
+			type: "string"
+		},
+		{
+			name: "customWelcomeList",
+			label: "自定义欢迎模板",
+			helptip: "您可以添加其它模板或用户子页面，请记住它们将被替换引用。",
+			type: "customList",
+			customListValueTitle: "模板名（不带大括号）",
+			customListLabelTitle: "显示的文本"
+		}
+	]
+},
+
+{
+	title: "删除表决",
 	preferences: [
 		// TwinkleConfig.xfdWatchPage (string)
 		// The watchlist setting of the page being nominated for XfD. Either "yes" (add to watchlist), "no" (don't
@@ -602,7 +611,7 @@ Twinkle.config.sections = [
 		// Either "yes" (add to watchlist), "no" (don't add to watchlist), or "default" (use setting from preferences). Default is "default" (duh).
 		{
 			name: "xfdWatchDiscussion",
-			label: "添加存废讨论页到监视列表",
+			label: "添加删除表决页到监视列表",
 			helptip: "当日的页面。",
 			type: "enum",
 			enumValues: Twinkle.config.commonEnums.watchlist
@@ -1660,7 +1669,7 @@ Twinkle.config.writePrefs = function twinkleconfigWritePrefs(pageobj) {
 		"// twinkleoptions.js到此为止\n";
 
 	pageobj.setPageText(text);
-	pageobj.setEditSummary("保存Twinkle参数设置：来自[[" + Morebits.pageNameNorm + "]]的自动编辑。 ([[WP:TW|TW]])");
+	pageobj.setEditSummary("保存Twinkle参数设置：来自[[" + Morebits.pageNameNorm + "]]的自动编辑。 ([[w:WP:TW|TW]])");
 	pageobj.setCreateOption("recreate");
 	pageobj.save(Twinkle.config.saveSuccess);
 };
@@ -1672,7 +1681,7 @@ Twinkle.config.saveSuccess = function twinkleconfigSaveSuccess(pageobj) {
 	noticebox.className = "successbox";
 	noticebox.style.fontSize = "100%";
 	noticebox.style.marginTop = "2em";
-	noticebox.innerHTML = "<p><b>您的Twinkle参数设置已被保存。</b></p><p>要看到这些更改，您可能需要<a href=\"" + mw.util.getUrl("WP:BYPASS") + "\" title=\"WP:BYPASS\"><b>绕过浏览器缓存</b></a>。</p>";
+	noticebox.innerHTML = "<p><b>您的Twinkle参数设置已被保存。</b></p><p>要看到这些更改，您可能需要<a href=\"" + mw.util.getUrl("w:WP:BYPASS") + "\" title=\"w:WP:BYPASS\"><b>绕过浏览器缓存</b></a>。</p>";
 	Morebits.status.root.appendChild(noticebox);
 	var noticeclear = document.createElement("br");
 	noticeclear.style.clear = "both";

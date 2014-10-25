@@ -30,7 +30,7 @@ Twinkle.copyvio.callback = function twinklecopyvioCallback() {
 	var Window = new Morebits.simpleWindow( 600, 350 );
 	Window.setTitle( "提报侵权页面" );
 	Window.setScriptName( "Twinkle" );
-	Window.addFooterLink( "Twinkle帮助", "WP:TW/DOC#copyvio" );
+	Window.addFooterLink( "Twinkle帮助", "w:WP:TW/DOC#copyvio" );
 
 	var form = new Morebits.quickForm( Twinkle.copyvio.callback.evaluate );
 	form.append( {
@@ -47,7 +47,9 @@ Twinkle.copyvio.callback = function twinklecopyvioCallback() {
 					value: 'notify',
 					name: 'notify',
 					tooltip: "在页面创建者对话页上放置一通知模板。",
-					checked: true
+					//checked: true
+					checked: false,
+					disabled: true
 				}
 			]
 		}
@@ -95,12 +97,13 @@ Twinkle.copyvio.callbacks = {
 	},
 	taggingArticle: function(pageobj) {
 		var params = pageobj.getCallbackParameters();
-		var tag = "{{subst:Copyvio/auto|url=" + params.source.replace(/http/g, '&#104;ttp').replace(/\n+/g, '\n').replace(/^\s*([^\*])/gm, '* $1').replace(/^\* $/m, '') + "}}";
-		if ( /\/temp$/i.test( mw.config.get('wgPageName') ) ) {
+		var text = pageobj.getPageText();
+		var tag = "{{Copyvio|1=" + params.source.replace(/http/g, '&#104;ttp').replace(/\n+/g, '\n').replace(/^\s*([^\*])/gm, '* $1').replace(/^\* $/m, '') + "}}\n";
+		/*if ( /\/temp$/i.test( mw.config.get('wgPageName') ) ) {
 			tag = "{{D|G16}}\n" + tag;
-		}
+		}*/
 
-		pageobj.setPageText(tag);
+		pageobj.setPageText(tag+text);
 		pageobj.setEditSummary("本页面疑似侵犯版权" + Twinkle.getPref('summaryAd'));
 		switch (Twinkle.getPref('copyvioWatchPage')) {
 			case 'yes':
@@ -136,7 +139,7 @@ Twinkle.copyvio.callback.evaluate = function(e) {
 	mw.config.set('wgPageName', mw.config.get('wgPageName').replace(/_/g, ' '));  // for queen/king/whatever and country!
 
 	var source = e.target.source.value;
-	var usertalk = e.target.notify.checked;
+	var usertalk = false && e.target.notify.checked;
 
 	Morebits.simpleWindow.setButtonsEnabled( false );
 	Morebits.status.init( e.target );
@@ -147,7 +150,7 @@ Twinkle.copyvio.callback.evaluate = function(e) {
 	}
 
 	var query, wikipedia_page, wikipedia_api, logpage, params;
-	logpage = 'Wikipedia:頁面存廢討論/疑似侵權';
+	logpage = 'Wikivoyage:删除表决/疑似侵权';
 	params = { source: source, logpage: logpage, usertalk: usertalk};
 
 	Morebits.wiki.addCheckpoint();

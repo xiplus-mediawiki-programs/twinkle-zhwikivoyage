@@ -15,7 +15,7 @@
  */
 
 Twinkle.close = function twinkleclose() {
-	if ( !Morebits.userIsInGroup('sysop') || !(/^Wikipedia:(頁面|檔案)存廢討論\/記錄\/\d+\/\d+\/\d+$/.test(mw.config.get('wgPageName'))) ) {
+	if ( !Morebits.userIsInGroup('sysop') || !(/^Wikivoyage:删除表决$/.test(mw.config.get('wgPageName'))) ) {
 		return;
 	}
 
@@ -144,6 +144,10 @@ Twinkle.close.codes = {
 			label: '转移至维基共享资源',
 			action: 'noop'
 		},
+		'tww': {
+			label: '转移至维基百科',
+			action: 'noop'
+		},
 		'twn': {
 			label: '转移至维基新闻',
 			action: 'noop'
@@ -178,10 +182,10 @@ Twinkle.close.codes = {
 		//	label: '转送页面存废讨论',
 		//	action: 'noop'
 		//},
-		'm2ifd': {
-			label: '转送文件存废讨论',
-			action: 'noop'
-		},
+		//'m2ifd': {
+		//	label: '转送文件存废讨论',
+		//	action: 'noop'
+		//},
 		'r': {
 			label: '重定向',
 			action: 'noop'
@@ -207,9 +211,9 @@ Twinkle.close.codes = {
 
 Twinkle.close.callback = function twinklecloseCallback(title, section, noop) {
 	var Window = new Morebits.simpleWindow( 400, 150 );
-	Window.setTitle( "关闭存废讨论 \u00B7 " + title );
+	Window.setTitle( "关闭删除表决 \u00B7 " + title );
 	Window.setScriptName( "Twinkle" );
-	Window.addFooterLink( "Twinkle帮助", "WP:TW/DOC#close" );
+	Window.addFooterLink( "Twinkle帮助", "w:WP:TW/DOC#close" );
 
 	var form = new Morebits.quickForm( Twinkle.close.callback.evaluate );
 
@@ -325,7 +329,7 @@ Twinkle.close.callback.evaluate = function twinklecloseCallbackEvaluate(e) {
 				Twinkle.close.callbacks.del(params);
 				break;
 			case 'keep':
-				var wikipedia_page = new Morebits.wiki.page( params.title, '移除存废讨论模板' );
+				var wikipedia_page = new Morebits.wiki.page( params.title, '移除删除表决模板' );
 				wikipedia_page.setCallbackParameters( params );
 				wikipedia_page.load( Twinkle.close.callbacks.keep );
 				break;
@@ -342,7 +346,7 @@ Twinkle.close.callbacks = {
 
 		var page = new Morebits.wiki.page( params.title, "删除页面" );
 
-		page.setEditSummary( '存废讨论通过：[[' + mw.config.get('wgPageName') + ']]' + Twinkle.getPref('deletionSummaryAd') );
+		page.setEditSummary( '删除表决通过：[[Special:永久链接/' + mw.config.get('wgRevisionId') + ']]' + Twinkle.getPref('deletionSummaryAd') );
 		page.deletePage(function() {
 			page.getStatusElement().info("完成");
 			Twinkle.close.callbacks.talkend( params );
@@ -361,7 +365,7 @@ Twinkle.close.callbacks = {
 		var params = pageobj.getCallbackParameters();
 
 		var pagetitle = mw.Title.newFromText(params.title);
-		if (pagetitle.getNamespaceId() % 2 === 0) {
+		/*if (pagetitle.getNamespaceId() % 2 === 0) {
 			var talkpagetitle = new mw.Title(pagetitle.getMainText(), pagetitle.getNamespaceId() + 1);
 			var talkpage = new Morebits.wiki.page(talkpagetitle.toString(), '标记讨论页');
 			var vfdkept = '{{vfd-kept|' + mw.config.get('wgPageName').split('/').slice(2).join('/') + '|' + params.messageData.label + '}}\n';
@@ -369,19 +373,18 @@ Twinkle.close.callbacks = {
 			talkpage.setEditSummary('[[' + mw.config.get('wgPageName') + ']]：' + params.messageData.label + Twinkle.getPref('summaryAd'));
 			talkpage.setCreateOption('recreate');
 			talkpage.prepend();
-		}
+		}*/
 
-		var newtext = text.replace(/\{\{([rsaiftcmv]fd)\|[^{}]*?\}\}\n*/gi, '');
+		var newtext = text.replace(/\{\{(vfd)(?:\|[^{}]*?)?\}\}\n*/gi, '');
 		if (params.code !== 'tk') {
-			newtext = newtext.replace(/\{\{(notability)\|[^{}]*?\}\}\n*/gi, '');
-			newtext = newtext.replace(/\{\{(substub)\|[^{}]*?\}\}\n*/gi, '');
+			newtext = newtext.replace(/\{\{(style)\|[^{}]*?\}\}\n*/gi, '');
 		}
 		if (newtext === text) {
-			statelem.warn("未找到存废讨论模板，可能已被移除");
+			statelem.warn("未找到删除表决模板，可能已被移除");
 			Twinkle.close.callbacks.talkend( params );
 			return;
 		}
-		var editsummary = '存废讨论关闭：[[' + mw.config.get('wgPageName') + ']]';
+		var editsummary = '删除表决关闭：[[' + mw.config.get('wgPageName') + ']]';
 
 		pageobj.setPageText(newtext);
 		pageobj.setEditSummary(editsummary + Twinkle.getPref('summaryAd'));
@@ -404,7 +407,7 @@ Twinkle.close.callbacks = {
 		var text = pageobj.getPageText();
 		var params = pageobj.getCallbackParameters();
 
-		if (text.indexOf('{{delh') !== -1) {
+		if (text.indexOf('{{discussion top') !== -1) {
 			statelem.error( "讨论已被关闭" );
 			return;
 		}
@@ -417,15 +420,15 @@ Twinkle.close.callbacks = {
 		var bar = text.split('\n----\n');
 		var split = bar[0].split('\n');
 
-		text = split[0] + '\n{{delh|' + params.code + '}}\n' + split.slice(1).join('\n');
-		text += '\n----\n: ' + params.messageData.label;
+		text = split[0] + '\n{{discussion top}}\n' + split.slice(1).join('\n');
+		text += "\n----\n: '''" + (params.messageData.action == 'del' ? '已删除' : '未删除') + "'''：" + params.messageData.label;
 		if (params.remark) {
-			text += '：' + params.remark;
+			text += '，' + params.remark;
 		}
 		else {
 			text += '。';
 		}
-		text += '--~~~~\n{{delf}}';
+		text += '--~~~~\n{{discussion bottom}}';
 
 		if (bar[1]) {
 			text += '\n----\n' + bar.slice(1).join('\n----\n');

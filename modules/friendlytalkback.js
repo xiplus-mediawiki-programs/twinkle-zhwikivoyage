@@ -32,7 +32,7 @@ Twinkle.talkback.callback = function( ) {
 	Window.setTitle("回复通告");
 	Window.setScriptName("Twinkle");
 	Window.addFooterLink( "关于{{talkback}}", "Template:Talkback" );
-	Window.addFooterLink( "Twinkle帮助", "WP:TW/DOC#talkback" );
+	Window.addFooterLink( "Twinkle帮助", "w:WP:TW/DOC#talkback" );
 
 	var form = new Morebits.quickForm( callback_evaluate );
 
