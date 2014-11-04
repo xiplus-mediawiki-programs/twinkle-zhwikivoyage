@@ -318,11 +318,6 @@ Twinkle.speedy.generateCsdList = function twinklespeedyGenerateCsdList(list, mod
 	return $.map(list, function(critElement) {
 		var criterion = $.extend({}, critElement);
 
-		// hack to get the g11 radio / checkbox right
-		if (criterion.value === 'g11') {
-			criterion.style = Twinkle.getPref('enlargeG11Input') ? 'height: 2em; width: 2em; height: -moz-initial; width: -moz-initial; -moz-transform: scale(2); -o-transform: scale(2);' : '';
-		}
-
 		if (!wantSubgroups) {
 			criterion.subgroup = null;
 		}
@@ -489,27 +484,6 @@ Twinkle.speedy.callbacks = {
 					new Morebits.status( '删除重定向' ) );
 				wikipedia_api.params = params;
 				wikipedia_api.post();
-			}
-
-			// prompt for protect on G11
-			var $link, $bigtext;
-			if (params.normalized === 'g11') {
-				$link = $('<a/>', {
-					'href': '#',
-					'text': '点击这里施行保护',
-					'css': { 'fontSize': '130%', 'fontWeight': 'bold' },
-					'click': function(){
-						Morebits.wiki.actionCompleted.redirect = null;
-						Twinkle.speedy.dialog.close();
-						mw.config.set('wgArticleId', 0);
-						Twinkle.protect.callback();
-					}
-				});
-				$bigtext = $('<span/>', {
-					'text': '白纸保护该页',
-					'css': { 'fontSize': '130%', 'fontWeight': 'bold' }
-				});
-				Morebits.status.info($bigtext[0], $link[0]);
 			}
 
 			// promote Unlink tool

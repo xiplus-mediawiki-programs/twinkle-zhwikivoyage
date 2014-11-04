@@ -153,37 +153,6 @@ Twinkle.config.sections = [
 },
 
 {
-	title: "图片删除",
-	preferences: [
-		// TwinkleConfig.notifyUserOnDeli (boolean)
-		// If the user should be notified after placing a file deletion tag
-		{
-			name: "notifyUserOnDeli",
-			label: "默认勾选“通知创建者”",
-			type: "boolean"
-		},
-
-		// TwinkleConfig.deliWatchPage (string)
-		// The watchlist setting of the page tagged for deletion. Either "yes", "no", or "default". Default is "default" (Duh).
-		{
-			name: "deliWatchPage",
-			label: "标记图片时添加到监视列表",
-			type: "enum",
-			enumValues: Twinkle.config.commonEnums.watchlist
-		},
-
-		// TwinkleConfig.deliWatchUser (string)
-		// The watchlist setting of the user talk page if a notification is placed. Either "yes", "no", or "default". Default is "default" (Duh).
-		{
-			name: "deliWatchUser",
-			label: "标记图片时添加创建者对话页到监视列表",
-			type: "enum",
-			enumValues: Twinkle.config.commonEnums.watchlist
-		}
-	]
-},
-
-{
 	title: "回退",  // twinklefluff module
 	preferences: [
 		// TwinkleConfig.openTalkPage (array)
@@ -246,18 +215,6 @@ Twinkle.config.sections = [
 			label: "在这些页面上显示回退链接",
 			type: "set",
 			setValues: { diff: "差异", others: "其它用户的贡献", mine: "我的贡献" }
-		}
-	]
-},
-
-{
-	title: "共享IP标记",
-	inFriendlyConfig: true,
-	preferences: [
-		{
-			name: "markSharedIPAsMinor",
-			label: "将共享IP标记标记为小修改",
-			type: "boolean"
 		}
 	]
 },
@@ -395,15 +352,7 @@ Twinkle.config.sections = [
 			type: "set",
 			setValues: Twinkle.config.commonSets.csdAndDICriteria,
 			setDisplayOrder: Twinkle.config.commonSets.csdAndDICriteriaDisplayOrder
-		},
-
-		{
-			name: "enlargeG11Input",
-			label: "扩大CSD G11的按钮",
-			helptip: "扩为默认的两倍大。",
-			type: "boolean"
 		}
-	]
 },
 
 {
@@ -490,65 +439,6 @@ Twinkle.config.sections = [
 },
 
 {
-	title: "警告用户",
-	preferences: [
-		// TwinkleConfig.defaultWarningGroup (int)
-		// if true, watch the page which has been dispatched an warning or notice, if false, default applies
-		{
-			name: "defaultWarningGroup",
-			label: "默认警告级别",
-			type: "enum",
-			enumValues: {
-				"1": "层级1",
-				"2": "层级2",
-				"3": "层级3",
-				"4": "层级4",
-				"5": "层级4im",
-				"6": "单层级通知",
-				"7": "单层级警告",
-				"9": "自定义警告",
-				"8": "封禁（仅管理员）"
-			}
-		},
-
-		// TwinkleConfig.showSharedIPNotice may take arguments:
-		// true: to show shared ip notice if an IP address
-		// false: to not print the notice
-		{
-			name: "showSharedIPNotice",
-			label: "在IP对话页上显示附加信息",
-			helptip: "使用的模板是{{SharedIPAdvice}}。",
-			type: "boolean"
-		},
-
-		// TwinkleConfig.watchWarnings (boolean)
-		// if true, watch the page which has been dispatched an warning or notice, if false, default applies
-		{
-			name: "watchWarnings",
-			label: "警告时添加用户对话页到监视列表",
-			type: "boolean"
-		},
-
-		// TwinkleConfig.blankTalkpageOnIndefBlock (boolean)
-		// if true, blank the talk page when issuing an indef block notice (per [[WP:UW#Indefinitely blocked users]])
-		{
-			name: "blankTalkpageOnIndefBlock",
-			label: "无限期封禁时清空对话页",
-			adminOnly: true,
-			type: "boolean"
-		},
-		{
-			name: "customWarningList",
-			label: "自定义警告模板",
-			helptip: "您可以加入模板或用户子页面。自定义警告会出现在警告对话框中“自定义警告”一节。",
-			type: "customList",
-			customListValueTitle: "模板名（不含大括号）",
-			customListLabelTitle: "显示的文字（和编辑摘要）"
-		}
-	]
-},
-
-{
 	title: "欢迎用户",
 	inFriendlyConfig: true,
 	preferences: [
@@ -612,7 +502,6 @@ Twinkle.config.sections = [
 		{
 			name: "xfdWatchDiscussion",
 			label: "添加删除表决页到监视列表",
-			helptip: "当日的页面。",
 			type: "enum",
 			enumValues: Twinkle.config.commonEnums.watchlist
 		},
@@ -702,56 +591,6 @@ Twinkle.config.sections = [
 		// twinklefluff.js: defines how many revision to query maximum, maximum possible is 50, default is 50
 		{
 			name: "revertMaxRevisions",
-			type: "integer"
-		},
-		// twinklebatchdelete.js: How many pages should be processed at a time
-		{
-			name: "batchdeleteChunks",
-			type: "integer"
-		},
-		// twinklebatchdelete.js: How many pages left in the process of being completed should allow a new batch to be initialized
-		{
-			name: "batchDeleteMinCutOff",
-			type: "integer"
-		},
-		// twinklebatchdelete.js: How many pages should be processed maximum
-		{
-			name: "batchMax",
-			type: "integer"
-		},
-		// twinklebatchprotect.js: How many pages should be processed at a time
-		{
-			name: "batchProtectChunks",
-			type: "integer"
-		},
-		// twinklebatchprotect.js: How many pages left in the process of being completed should allow a new batch to be initialized
-		{
-			name: "batchProtectMinCutOff",
-			type: "integer"
-		},
-		// twinklebatchundelete.js: How many pages should be processed at a time
-		{
-			name: "batchundeleteChunks",
-			type: "integer"
-		},
-		// twinklebatchundelete.js: How many pages left in the process of being completed should allow a new batch to be initialized
-		{
-			name: "batchUndeleteMinCutOff",
-			type: "integer"
-		},
-		// twinkledelimages.js: How many files should be processed at a time
-		{
-			name: "deliChunks",
-			type: "integer"
-		},
-		// twinkledelimages.js: How many files should be processed maximum
-		{
-			name: "deliMax",
-			type: "integer"
-		},
-		// twinkledeprod.js: How many pages should be processed at a time
-		{
-			name: "proddeleteChunks",
 			type: "integer"
 		}
 	]

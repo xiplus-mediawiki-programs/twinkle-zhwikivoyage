@@ -56,10 +56,6 @@ Twinkle.defaultConfig.twinkle = {
 	offerReasonOnNormalRevert: true,
 	confirmOnFluff: false,
 	showRollbackLinks: [ "diff", "others" ],
-	 // DI (twinkleimage)
-	notifyUserOnDeli: true,
-	deliWatchPage: "default",
-	deliWatchUser: "default",
 	 // CSD
 	speedySelectionStyle: "buttonClick",
 	watchSpeedyPages: [ ],
@@ -77,15 +73,8 @@ Twinkle.defaultConfig.twinkle = {
 	logSpeedyNominations: false,
 	speedyLogPageName: "快速删除日志",
 	noLogOnSpeedyNomination: [],
-	enlargeG11Input: true,
 	 // Unlink
 	unlinkNamespaces: [ "0", "10", "100", "118" ],
-	 // Warn
-	defaultWarningGroup: "1",
-	showSharedIPNotice: true,
-	watchWarnings: false,
-	blankTalkpageOnIndefBlock: false,
-	customWarningList: [],
 	 // XfD
 	xfdWatchDiscussion: "default",
 	xfdWatchPage: "default",
@@ -96,17 +85,7 @@ Twinkle.defaultConfig.twinkle = {
 	copyvioWatchUser: "default",
 	markCopyvioPagesAsPatrolled: true,
 	 // Hidden preferences
-	revertMaxRevisions: 50,
-	batchdeleteChunks: 50,
-	batchDeleteMinCutOff: 5,
-	batchMax: 5000,
-	batchProtectChunks: 50,
-	batchProtectMinCutOff: 5,
-	batchundeleteChunks: 50,
-	batchUndeleteMinCutOff: 5,
-	deliChunks: 500,
-	deliMax: 5000,
-	proddeleteChunks: 50
+	revertMaxRevisions: 50
 };
 
 // now some skin dependent config.
@@ -147,9 +126,7 @@ Twinkle.defaultConfig.friendly = {
 	markTalkbackAsMinor: true,
 	insertTalkbackSignature: true,  // always sign talkback templates
 	talkbackHeading: "回复通告",
-	mailHeading: "您有新邮件！",
-	 // Shared
-	markSharedIPAsMinor: true
+	mailHeading: "您有新邮件！"
 };
 
 Twinkle.getPref = function twinkleGetPref( name ) {
