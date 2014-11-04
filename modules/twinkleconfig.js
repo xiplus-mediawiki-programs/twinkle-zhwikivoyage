@@ -353,6 +353,7 @@ Twinkle.config.sections = [
 			setValues: Twinkle.config.commonSets.csdAndDICriteria,
 			setDisplayOrder: Twinkle.config.commonSets.csdAndDICriteriaDisplayOrder
 		}
+	]
 },
 
 {
@@ -525,7 +526,6 @@ Twinkle.config.sections = [
 			type: "boolean"
 		}
 	]
-
 },
 
 {
