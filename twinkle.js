@@ -6,7 +6,7 @@
  * |                           修改前请联系维护者。                          |
  * +-------------------------------------------------------------------------+
  *
- * 从Github导入[https://github.com/zhuyifei1999/twinkle]
+ * 从Github导入[https://github.com/zhuyifei1999/twinkle-zhwikivoyage]
  *
  * ----------
  *

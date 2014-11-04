@@ -2399,7 +2399,7 @@ Morebits.wiki.page = function(pageName, currentAction) {
 				}
 			}
 			// set revert edit summary
-			ctx.editSummary = "[[WP:UNDO|取消]]由 " + ctx.revertUser + " 所做出的修订 " + ctx.revertOldID + "：" + ctx.editSummary;
+			ctx.editSummary = "取消由 " + ctx.revertUser + " 所做出的修订 " + ctx.revertOldID + "：" + ctx.editSummary;
 		}
 
 		ctx.pageLoaded = true;
