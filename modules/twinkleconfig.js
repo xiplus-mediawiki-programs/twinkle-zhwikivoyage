@@ -1508,7 +1508,7 @@ Twinkle.config.writePrefs = function twinkleconfigWritePrefs(pageobj) {
 		"// twinkleoptions.js到此为止\n";
 
 	pageobj.setPageText(text);
-	pageobj.setEditSummary("保存Twinkle参数设置：来自[[" + Morebits.pageNameNorm + "]]的自动编辑。 ([[w:WP:TW|TW]])");
+	pageobj.setEditSummary("保存Twinkle参数设置：来自[[" + Morebits.pageNameNorm + "]]的自动编辑。 ([[WV:TW|TW]])");
 	pageobj.setCreateOption("recreate");
 	pageobj.save(Twinkle.config.saveSuccess);
 };

@@ -130,8 +130,8 @@ Twinkle.welcome.callback = function friendlywelcomeCallback( uid ) {
 			list: [
 				{ type: 'option', value: 'standard', label: 'Standard welcomes', selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
 				{ type: 'option', value: 'anonymous', label: 'IP user welcomes', selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
-				{ type: 'option', value: 'wikiProject', label: 'WikiProject welcomes' },
-				{ type: 'option', value: 'nonEnglish', label: 'Non-English welcomes' }
+				{ type: 'option', value: 'wikiProject', label: 'Expedition welcomes' },
+				{ type: 'option', value: 'nonEnglish', label: 'Non-Chinese welcomes' }
 			]
 		});
 
@@ -204,7 +204,8 @@ Twinkle.welcome.populateWelcomeList = function(e) {
 		case "standard":
 			container.append({ type: 'header', label: '常规欢迎模板' });
 			appendTemplates([
-				"welcome"
+				"welcome",
+				"wikipedian"
 			]);
 			container.append({ type: 'header', label: '问题用户欢迎模板' });
 			appendTemplates([]);
@@ -212,15 +213,15 @@ Twinkle.welcome.populateWelcomeList = function(e) {
 		case "anonymous":
 			container.append({ type: 'header', label: '匿名用户欢迎模板' });
 			appendTemplates([
-				//"welcome-anon"
+				"welcomeanon"
 			]);
 			break;
 		case "wikiProject":
-			container.append({ type: 'header', label: 'WikiProject相关欢迎模板' });
+			container.append({ type: 'header', label: '远征队相关欢迎模板' });
 			appendTemplates([]);
 			break;
 		case "nonEnglish":
-			container.append({ type: 'header', label: '非英语欢迎模板' });
+			container.append({ type: 'header', label: '非中文欢迎模板' });
 			appendTemplates([]);
 			break;
 		default:
@@ -254,15 +255,21 @@ Twinkle.welcome.templates = {
 	// GENERAL WELCOMES
 
 	"welcome": {
-		description: "standard welcome",
+		description: "一般欢迎",
 		linkedArticle: false,
 		syntax: "{{subst:welcome}}"
 	},
 
-	"welcome-anon": {
-		description: "for anonymous users; encourages creating an account",
-		linkedArticle: true,
-		syntax: "{{subst:welcome-anon|art=$ARTICLE$}} ~~~~"
+	"wikipedian": {
+		description: "欢迎维基百科人",
+		linkedArticle: false,
+		syntax: "{{subst:welcome}}"
+	},
+
+	"welcomeanon": {
+		description: "欢迎匿名用户；鼓励注册账户",
+		linkedArticle: false,
+		syntax: "{{subst:welcomeanon}}"
 	}
 };
 
