@@ -125,13 +125,13 @@ Twinkle.welcome.callback = function friendlywelcomeCallback( uid ) {
 	form.append({
 			type: 'select',
 			name: 'type',
-			label: 'Type of welcome: ',
+			label: '欢迎的类型：',
 			event: Twinkle.welcome.populateWelcomeList,
 			list: [
-				{ type: 'option', value: 'standard', label: 'Standard welcomes', selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
-				{ type: 'option', value: 'anonymous', label: 'IP user welcomes', selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
-				{ type: 'option', value: 'wikiProject', label: 'Expedition welcomes' },
-				{ type: 'option', value: 'nonEnglish', label: 'Non-Chinese welcomes' }
+				{ type: 'option', value: 'standard', label: '常规欢迎模板', selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
+				{ type: 'option', value: 'anonymous', label: '匿名用户欢迎模板', selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
+				{ type: 'option', value: 'wikiProject', label: '远征队相关欢迎模板' },
+				{ type: 'option', value: 'nonEnglish', label: '非中文欢迎模板' }
 			]
 		});
 
