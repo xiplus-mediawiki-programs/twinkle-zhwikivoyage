@@ -263,7 +263,7 @@ Twinkle.welcome.templates = {
 	"wikipedian": {
 		description: "欢迎维基百科人",
 		linkedArticle: false,
-		syntax: "{{subst:welcome}}"
+		syntax: "{{subst:wikipedian}}"
 	},
 
 	"welcomeanon": {
