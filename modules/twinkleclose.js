@@ -78,10 +78,6 @@ Twinkle.close.codes = {
 		'ne': {
 			label: '目标页面或档案不存在，无效',
 			action: 'keep'
-		},
-		'nq': {
-			label: '提删者未取得提删资格，无效',
-			action: 'keep'
 		}
 	},
 	'保留': {
@@ -115,6 +111,10 @@ Twinkle.close.codes = {
 		'ic': {
 			label: '图像因侵权被删',
 			action: 'del'
+		},
+		'nc': {
+			label: '无共识',
+			action: 'del'
 		}
 	},
 	'快速删除': {
@@ -144,7 +144,7 @@ Twinkle.close.codes = {
 			label: '转移至维基共享资源',
 			action: 'noop'
 		},
-		'tww': {
+		'twp': {
 			label: '转移至维基百科',
 			action: 'noop'
 		},
@@ -178,14 +178,6 @@ Twinkle.close.codes = {
 			label: '转交侵权',
 			action: 'noop'
 		},
-		//'m2pfd': {
-		//	label: '转送页面存废讨论',
-		//	action: 'noop'
-		//},
-		//'m2ifd': {
-		//	label: '转送文件存废讨论',
-		//	action: 'noop'
-		//},
 		'r': {
 			label: '重定向',
 			action: 'noop'
@@ -201,10 +193,6 @@ Twinkle.close.codes = {
 		'merge': {
 			label: '并入',
 			action: 'noop'
-		},
-		'nc': {
-			label: '无共识',
-			action: 'keep'
 		}
 	}
 }
@@ -376,9 +364,6 @@ Twinkle.close.callbacks = {
 		}*/
 
 		var newtext = text.replace(/\{\{(vfd)(?:\|[^{}]*?)?\}\}\n*/gi, '');
-		if (params.code !== 'tk') {
-			newtext = newtext.replace(/\{\{(style)\|[^{}]*?\}\}\n*/gi, '');
-		}
 		if (newtext === text) {
 			statelem.warn("未找到删除表决模板，可能已被移除");
 			Twinkle.close.callbacks.talkend( params );
@@ -421,7 +406,10 @@ Twinkle.close.callbacks = {
 		var split = bar[0].split('\n');
 
 		text = split[0] + '\n{{discussion top}}\n' + split.slice(1).join('\n');
-		text += "\n----\n: '''" + (params.messageData.action == 'del' ? '已删除' : '未删除') + "'''：" + params.messageData.label;
+		text += "\n----\n: '''" + (params.messageData.action == 'del' ? '已删除' : '未删除') + "'''"
+		if (['d', 'k'].indexOf(params.messageData.code === -1) {
+			text += '：' + params.messageData.label;
+		}
 		if (params.remark) {
 			text += '，' + params.remark;
 		}
