@@ -3,6 +3,7 @@ all:
 modules = modules/friendlytag.js \
 		  modules/friendlytalkback.js \
 		  modules/friendlywelcome.js \
+		  modules/twinkleclose.js \
 		  modules/twinkleconfig.js \
 		  modules/twinklecopyvio.js \
 		  modules/twinklediff.js \
