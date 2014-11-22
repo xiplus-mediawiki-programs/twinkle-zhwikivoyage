@@ -407,7 +407,7 @@ Twinkle.close.callbacks = {
 
 		text = split[0] + '\n{{discussion top}}\n' + split.slice(1).join('\n');
 		text += "\n----\n: '''" + (params.messageData.action == 'del' ? '已删除' : '未删除') + "'''"
-		if (['d', 'k'].indexOf(params.messageData.code === -1) {
+		if (['d', 'k'].indexOf(params.messageData.code) === -1) {
 			text += '：' + params.messageData.label;
 		}
 		if (params.remark) {
