@@ -79,15 +79,6 @@ Twinkle.tag.callback = function friendlytagCallback( uid ) {
 
 		case '重定向':
 			Window.setTitle( "重定向标记" );
-
-			form.append({ type: 'header', label:'拼写、错误拼写、时态和大小写模板' });
-			form.append({ type: 'checkbox', name: 'redirectTags', list: Twinkle.tag.spellingList });
-
-			form.append({ type: 'header', label:'其他名称模板' });
-			form.append({ type: 'checkbox', name: 'redirectTags', list: Twinkle.tag.alternativeList });
-
-			form.append({ type: 'header', label:'杂项和管理用重定向模板' });
-			form.append({ type: 'checkbox', name: 'redirectTags', list: Twinkle.tag.administrativeList });
 			break;
 
 		default:
@@ -327,12 +318,6 @@ Twinkle.tag.article.tagCategories = {
 };
 
 // Tags for REDIRECTS start here
-
-Twinkle.tag.spellingList = [];
-
-Twinkle.tag.alternativeList = [];
-
-Twinkle.tag.administrativeList = [];
 
 
 Twinkle.tag.callbacks = {
