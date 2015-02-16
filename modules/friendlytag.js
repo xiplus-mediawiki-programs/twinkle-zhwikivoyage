@@ -79,6 +79,7 @@ Twinkle.tag.callback = function friendlytagCallback( uid ) {
 
 		case '重定向':
 			Window.setTitle( "重定向标记" );
+			form.append({ type: 'header', label:'（暂无）' });
 			break;
 
 		default:
