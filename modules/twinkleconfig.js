@@ -66,6 +66,8 @@ Twinkle.config.commonSets = {
 		"15": "Category talk",
 		"100": "Portal",
 		"101": "Portal talk",
+		"118": "Draft",
+		"119": "Draft talk",
 		"828": "Module",
 		"829": "Module talk"
 	}
@@ -285,7 +287,7 @@ Twinkle.config.sections = [
 		// What types of actions that should result user talk page to be opened when speedily deleting (admin only)
 		{
 			name: "openUserTalkPageOnSpeedyDelete",
-			label: "使用以下理由是打开用户对话页",
+			label: "使用以下理由时打开用户对话页",
 			adminOnly: true,
 			type: "set",
 			setValues: Twinkle.config.commonSets.csdAndDICriteria,
