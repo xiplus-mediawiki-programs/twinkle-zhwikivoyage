@@ -289,6 +289,9 @@ Twinkle.speedy.callback.modeChanged = function twinklespeedyCallbackModeChanged(
 
 	/*if (Morebits.wiki.isPageRedirect() || Morebits.userIsInGroup('sysop')) {
 		work_area.append( { type: 'header', label: '重定向' } );
+		if (namespace === 0) {
+			work_area.append( { type: radioOrCheckbox, name: 'csd', list: Twinkle.speedy.generateCsdList(Twinkle.speedy.redirectArticleList, mode) } );
+		}
 		work_area.append( { type: radioOrCheckbox, name: 'csd', list: Twinkle.speedy.generateCsdList(Twinkle.speedy.redirectList, mode) } );
 	}*/
 
@@ -403,6 +406,8 @@ Twinkle.speedy.generalList = [
 		hideSubgroupWhenSysop: true
 	}
 ];
+
+Twinkle.speedy.redirectArticleList = [];
 
 Twinkle.speedy.redirectList = [];
 
@@ -774,7 +779,7 @@ Twinkle.speedy.callbacks = {
 			appendText += " ~~~~~\n";
 
 			pageobj.setAppendText(appendText);
-			pageobj.setEditSummary("记录对[[" + Morebits.pageNameNorm + "]]的快速删除提名。" + Twinkle.getPref('summaryAd'));
+			pageobj.setEditSummary("记录对[[" + Morebits.pageNameNorm + "]]的快速删除提名" + Twinkle.getPref('summaryAd'));
 			pageobj.setCreateOption("recreate");
 			pageobj.append();
 		}

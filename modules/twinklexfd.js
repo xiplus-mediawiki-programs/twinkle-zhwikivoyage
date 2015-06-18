@@ -179,7 +179,7 @@ Twinkle.xfd.callbacks = {
 				var usertalkpage = new Morebits.wiki.page('User talk:' + initialContrib, "通知页面创建者（" + initialContrib + "）");
 				var notifytext = "\n{{subst:idw|File:" + mw.config.get('wgTitle') + "}}--~~~~";
 				usertalkpage.setAppendText(notifytext);
-				usertalkpage.setEditSummary("通知：页面[[" + Morebits.pageNameNorm + "]]删除表决提名。" + Twinkle.getPref('summaryAd'));
+				usertalkpage.setEditSummary("通知：页面[[" + Morebits.pageNameNorm + "]]删除表决提名" + Twinkle.getPref('summaryAd'));
 				usertalkpage.setCreateOption('recreate');
 				switch (Twinkle.getPref('xfdWatchUser')) {
 					case 'yes':
@@ -241,7 +241,7 @@ Twinkle.xfd.callbacks = {
 			var params = pageobj.getCallbackParameters();
 
 			pageobj.setAppendText("\n\n== [[:" + Morebits.pageNameNorm + "]] ==\n" + Morebits.string.formatReasonText(params.reason) + "--~~~~");
-			pageobj.setEditSummary("添加[[" + Morebits.pageNameNorm + "]]。" + Twinkle.getPref('summaryAd'));
+			pageobj.setEditSummary("添加[[" + Morebits.pageNameNorm + "]]" + Twinkle.getPref('summaryAd'));
 			switch (Twinkle.getPref('xfdWatchDiscussion')) {
 				case 'yes':
 					pageobj.setWatchlist(true);
