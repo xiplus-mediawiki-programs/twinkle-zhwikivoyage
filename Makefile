@@ -13,6 +13,6 @@ modules = modules/friendlytag.js \
 		  modules/twinklexfd.js
 
 deploy: twinkle.js morebits.js morebits.css $(modules)
-	./sync.pl --deploy $^
+	./sync.pl ${ARGS} --deploy $^
 
 .PHONY: deploy all

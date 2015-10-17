@@ -216,6 +216,11 @@ Twinkle.xfd.callbacks = {
 				text = textNoSd;
 			}
 
+			// Mark the page as patrolled, if wanted
+			if (Twinkle.getPref('markXfdPagesAsPatrolled')) {
+				pageobj.patrol();
+			}
+
 			pageobj.setPageText(tag + text);
 			pageobj.setEditSummary("删除表决：[[" + params.logpage + "#" + Morebits.pageNameNorm + "]]" + Twinkle.getPref('summaryAd'));
 			switch (Twinkle.getPref('xfdWatchPage')) {

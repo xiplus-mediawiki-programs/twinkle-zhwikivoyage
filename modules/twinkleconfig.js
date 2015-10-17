@@ -9,8 +9,8 @@
  ****************************************
  *** twinkleconfig.js: Preferences module
  ****************************************
- * Mode of invocation:     Adds configuration form to Wikipedia:Twinkle/Preferences and user 
-                           subpages named "/Twinkle preferences", and adds ad box to the top of user 
+ * Mode of invocation:     Adds configuration form to Wikipedia:Twinkle/Preferences and user
+                           subpages named "/Twinkle preferences", and adds ad box to the top of user
                            subpages belonging to the currently logged-in user which end in '.js'
  * Active on:              What I just said.  Yeah.
  * Config directives in:   TwinkleConfig
@@ -242,7 +242,6 @@ Twinkle.config.sections = [
 		{
 			name: "markSpeedyPagesAsPatrolled",
 			label: "标记时标记页面为已巡查（如可能）",
-			helptip: "基于技术原因，页面仅会在由Special:NewPages到达时被标记为已巡查。",
 			type: "boolean"
 		},
 
@@ -475,8 +474,13 @@ Twinkle.config.sections = [
 			label: "自定义欢迎模板",
 			helptip: "您可以添加其它模板或用户子页面，请记住它们将被替换引用。",
 			type: "customList",
-			customListValueTitle: "模板名（不带大括号）",
-			customListLabelTitle: "显示的文本"
+			customListValueTitle: "模板名（不含大括号）",
+			customListLabelTitle: "显示的文字（和编辑摘要）"
+		},
+		{
+			name: "markXfdPagesAsPatrolled",
+			label: "在提交存废讨论时将页面标记为已巡查（如可能）",
+			type: "boolean"
 		}
 	]
 },
