@@ -56,7 +56,7 @@ Twinkle.welcome.normal = function() {
 			var welcomeNode = document.createElement('strong');
 			var welcomeLink = document.createElement('a');
 			welcomeLink.appendChild( spanTag( 'Black', '[' ) );
-			welcomeLink.appendChild( spanTag( 'Goldenrod', '欢迎' ) );
+			welcomeLink.appendChild( spanTag( 'Goldenrod', wgULS('欢迎', '歡迎') ) );
 			welcomeLink.appendChild( spanTag( 'Black', ']' ) );
 			welcomeNode.appendChild(welcomeLink);
 
@@ -87,7 +87,7 @@ Twinkle.welcome.normal = function() {
 	}
 	if( mw.config.get( 'wgNamespaceNumber' ) === 3 ) {
 		var username = mw.config.get( 'wgTitle' ).split( '/' )[0].replace( /\"/, "\\\""); // only first part before any slashes
-		Twinkle.addPortletLink( function(){ Twinkle.welcome.callback(username); }, "欢迎", "friendly-welcome", "欢迎用户" );
+		Twinkle.addPortletLink( function(){ Twinkle.welcome.callback(username); }, wgULS("欢迎", "歡迎"), "friendly-welcome", wgULS("欢迎用户", "歡迎用戶") );
 	}
 };
 
@@ -101,37 +101,37 @@ Twinkle.welcome.welcomeUser = function welcomeUser() {
 	};
 
 	Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-	Morebits.wiki.actionCompleted.notice = "欢迎完成，将在几秒钟后刷新";
+	Morebits.wiki.actionCompleted.notice = wgULS("欢迎完成，将在几秒钟后刷新", "歡迎完成，將在幾秒鐘後更新") ;
 
-	var wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'), "用户讨论页修改");
+	var wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'), wgULS("用户讨论页修改", "用戶討論頁修改"));
 	wikipedia_page.setFollowRedirect(true);
 	wikipedia_page.setCallbackParameters(params);
 	wikipedia_page.load(Twinkle.welcome.callbacks.main);
 };
 
 Twinkle.welcome.callback = function friendlywelcomeCallback( uid ) {
-	if( uid === mw.config.get('wgUserName') && !confirm( '您确定要欢迎自己吗？…' ) ){
+	if( uid === mw.config.get('wgUserName') && !confirm( wgULS('您确定要欢迎自己吗？…', '您確定要歡迎自己嗎？…') ) ){
 		return;
 	}
 
 	var Window = new Morebits.simpleWindow( 600, 420 );
-	Window.setTitle( "欢迎用户" );
+	Window.setTitle( wgULS("欢迎用户", "歡迎用戶") );
 	Window.setScriptName( "Twinkle" );
 	//Window.addFooterLink( "Welcoming Committee", "WP:WC" );
-	Window.addFooterLink( "Twinkle帮助", "W:WP:TW/DOC#welcome" );
+	Window.addFooterLink(wgULS("Twinkle帮助", "Twinkle幫助"), "W:WP:TW/DOC#welcome" );
 
 	var form = new Morebits.quickForm( Twinkle.welcome.callback.evaluate );
 
 	form.append({
 			type: 'select',
 			name: 'type',
-			label: '欢迎的类型：',
+			label: wgULS('欢迎的类型：', '歡迎的類型：'),
 			event: Twinkle.welcome.populateWelcomeList,
 			list: [
-				{ type: 'option', value: 'standard', label: '常规欢迎模板', selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
-				{ type: 'option', value: 'anonymous', label: '匿名用户欢迎模板', selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
-				{ type: 'option', value: 'wikiProject', label: '远征队相关欢迎模板' },
-				{ type: 'option', value: 'nonEnglish', label: '非中文欢迎模板' }
+				{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
+				{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
+				{ type: 'option', value: 'wikiProject', label: wgULS('远征队相关欢迎模板', '遠征隊相關歡迎模板') },
+				{ type: 'option', value: 'nonChinese', label:  wgULS('非中文欢迎模板', '非中文歡迎模板') },
 			]
 		});
 
@@ -140,9 +140,9 @@ Twinkle.welcome.callback = function friendlywelcomeCallback( uid ) {
 	form.append( {
 			type: 'input',
 			name: 'article',
-			label: '* 条目名（如模板支持）',
+			label: wgULS('* 条目名（如模板支持）', '* 條目名（如模板支援）'),
 			value:( Morebits.queryString.exists( 'vanarticle' ) ? Morebits.queryString.get( 'vanarticle' ) : '' ),
-			tooltip: '如果模板支持，您可在此处加入一个条目名。支持的模板已用星号标记出来。'
+			tooltip: wgULS('如果模板支持，您可在此处加入一个条目名。支持的模板已用星号标记出来。', '如果模板支援，您可在此處加入一個條目名。支援的模板已用星號標記出來。')
 		} );
 
 	var previewlink = document.createElement( 'a' );
@@ -150,7 +150,7 @@ Twinkle.welcome.callback = function friendlywelcomeCallback( uid ) {
 		Twinkle.welcome.callbacks.preview(result);  // |result| is defined below
 	});
 	previewlink.style.cursor = "pointer";
-	previewlink.textContent = '预览';
+	previewlink.textContent = wgULS('预览', '預覽');
 	form.append( { type: 'div', name: 'welcomepreview', label: [ previewlink ] } );
 
 	form.append( { type: 'submit' } );
@@ -171,7 +171,7 @@ Twinkle.welcome.populateWelcomeList = function(e) {
 	var container = new Morebits.quickForm.element({ type: "fragment" });
 
 	if ((type === "standard" || type === "anonymous") && Twinkle.getFriendlyPref("customWelcomeList").length) {
-		container.append({ type: 'header', label: '自定义欢迎模板' });
+		container.append({ type: 'header', label: wgULS('自定义欢迎模板', '自定義歡迎模板') });
 		container.append({
 			type: 'radio',
 			name: 'template',
@@ -202,30 +202,32 @@ Twinkle.welcome.populateWelcomeList = function(e) {
 
 	switch (type) {
 		case "standard":
-			container.append({ type: 'header', label: '常规欢迎模板' });
+			container.append({ type: 'header', label: wgULS('常规欢迎模板', '正規歡迎模板') });
 			appendTemplates([
 				"welcome",
 				"wikipedian"
 			]);
-			container.append({ type: 'header', label: '问题用户欢迎模板' });
+			container.append({ type: 'header', label: wgULS('问题用户欢迎模板', '問題用戶歡迎模板') });
 			appendTemplates([]);
 			break;
 		case "anonymous":
-			container.append({ type: 'header', label: '匿名用户欢迎模板' });
+			container.append({ type: 'header', label: wgULS('匿名用户欢迎模板', '匿名用戶歡迎模板') });
 			appendTemplates([
 				"welcomeanon"
 			]);
 			break;
 		case "wikiProject":
-			container.append({ type: 'header', label: '远征队相关欢迎模板' });
+			container.append({ type: 'header', label: wgULS('远征队相关欢迎模板', '遠征隊相關歡迎模板') });
 			appendTemplates([]);
 			break;
-		case "nonEnglish":
-			container.append({ type: 'header', label: '非中文欢迎模板' });
-			appendTemplates([]);
+		case "nonChinese":
+			container.append({ type: 'header', label: wgULS('非中文欢迎模板', '非中文歡迎模板') });
+			appendTemplates([
+				"welcome-en"
+			]);
 			break;
 		default:
-			container.append({ type: 'div', label: 'Twinkle.welcome.populateWelcomeList: 哪里出问题了' });
+			container.append({ type: 'div', label: wgULS('Twinkle.welcome.populateWelcomeList: 哪里出问题了', 'Twinkle.welcome.populateWelcomeList: 哪裡出問題了') });
 			break;
 	}
 
@@ -255,21 +257,27 @@ Twinkle.welcome.templates = {
 	// GENERAL WELCOMES
 
 	"welcome": {
-		description: "一般欢迎",
+		description: wgULS("一般欢迎", "一般歡迎"),
 		linkedArticle: false,
 		syntax: "{{subst:welcome}}"
 	},
 
 	"wikipedian": {
-		description: "欢迎维基百科人",
+		description: wgULS("欢迎维基百科人", "歡迎維基百科人"),
 		linkedArticle: false,
 		syntax: "{{subst:wikipedian}}"
 	},
 
 	"welcomeanon": {
-		description: "欢迎匿名用户；鼓励注册账户",
+		description: wgULS("欢迎匿名用户；鼓励注册账户", "歡迎匿名用戶；鼓勵註冊帳戶"),
 		linkedArticle: false,
 		syntax: "{{subst:welcomeanon}}"
+	},
+
+	"nonChinese": {
+		description: wgULS("非中文欢迎", "非中文歡迎"),
+		linkedArticle: false,
+		syntax: "{{subst:welcome-en}}"
 	}
 };
 
@@ -279,7 +287,7 @@ Twinkle.welcome.getTemplateWikitext = function(template, article) {
 		return properties.syntax.
 			replace("$USERNAME$", Twinkle.getFriendlyPref("insertUsername") ? mw.config.get("wgUserName") : "").
 			replace("$ARTICLE$", article ? article : "").
-			replace(/\$HEADER\$\s*/, "== 欢迎 ==\n\n").
+			replace(/\$HEADER\$\s*/, wgULS("== 欢迎 ==\n\n", "== 歡迎 ==\n\n")).
 			replace("$EXTRA$", "");  // EXTRA is not implemented yet
 	} else {
 		return "{{subst:" + template + (article ? ("|art=" + article) : "") + "}} ~~~~";
@@ -289,8 +297,8 @@ Twinkle.welcome.getTemplateWikitext = function(template, article) {
 Twinkle.welcome.callbacks = {
 	preview: function(form) {
 		var previewDialog = new Morebits.simpleWindow(750, 400);
-		previewDialog.setTitle("欢迎模板预览");
-		previewDialog.setScriptName("欢迎用户");
+		previewDialog.setTitle(wgULS("欢迎模板预览", "歡迎模板預覽"));
+		previewDialog.setScriptName(wgULS("欢迎用户", "歡迎用戶"));
 		previewDialog.setModality(true);
 
 		var previewdiv = document.createElement("div");
@@ -303,7 +311,7 @@ Twinkle.welcome.callbacks = {
 
 		var submit = document.createElement("input");
 		submit.setAttribute("type", "submit");
-		submit.setAttribute("value", "关闭");
+		submit.setAttribute("value", wgULS("关闭", "關閉"));
 		previewDialog.addContent(submit);
 
 		previewDialog.display();
@@ -318,7 +326,7 @@ Twinkle.welcome.callbacks = {
 
 		// abort if mode is auto and form is not empty
 		if( pageobj.exists() && params.mode === 'auto' ) {
-			Morebits.status.info( '警告', '用户对话页非空，取消自动欢迎' );
+			Morebits.status.info( wgULS('警告', '用户对话页非空，取消自动欢迎', '警告', '用戶對話頁非空，取消自動歡迎') );
 			Morebits.wiki.actionCompleted.event();
 			return;
 		}
@@ -331,7 +339,7 @@ Twinkle.welcome.callbacks = {
 			text += "\n" + welcomeText;
 		}
 
-		var summaryText = "欢迎来到维基导游！";
+		var summaryText = wgULS("欢迎来到维基导游！", "歡迎來到維基導遊！");
 		pageobj.setPageText(text);
 		pageobj.setEditSummary(summaryText + Twinkle.getPref('summaryAd'));
 		pageobj.setWatchlist(Twinkle.getFriendlyPref('watchWelcomes'));
@@ -353,9 +361,9 @@ Twinkle.welcome.callback.evaluate = function friendlywelcomeCallbackEvaluate(e) 
 	Morebits.status.init( form );
 
 	Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-	Morebits.wiki.actionCompleted.notice = "欢迎完成，将在几秒钟后刷新";
+	Morebits.wiki.actionCompleted.notice = wgULS("欢迎完成，将在几秒钟后刷新", "歡迎完成，將在幾秒鐘後更新");
 
-	var wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'), "用户对话页修改");
+	var wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'),  wgULS("用户对话页修改", "用戶對話頁修改"));
 	wikipedia_page.setFollowRedirect(true);
 	wikipedia_page.setCallbackParameters(params);
 	wikipedia_page.load(Twinkle.welcome.callbacks.main);
