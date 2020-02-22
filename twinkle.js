@@ -93,25 +93,25 @@ Twinkle.defaultConfig.twinkle = {
 // now some skin dependent config.
 switch (mw.config.get('skin')) {
 	case 'vector':
-		Twinkle.defaultConfig.portletArea = 'right-navigation';
-		Twinkle.defaultConfig.portletId = 'p-twinkle';
-		Twinkle.defaultConfig.portletName = 'TW';
-		Twinkle.defaultConfig.portletType = 'menu';
-		Twinkle.defaultConfig.portletNext = 'p-search';
+		Twinkle.defaultConfig.twinkle.portletArea = 'right-navigation';
+		Twinkle.defaultConfig.twinkle.portletId = 'p-twinkle';
+		Twinkle.defaultConfig.twinkle.portletName = 'TW';
+		Twinkle.defaultConfig.twinkle.portletType = 'menu';
+		Twinkle.defaultConfig.twinkle.portletNext = 'p-search';
 		break;
 	case 'timeless':
-		Twinkle.defaultConfig.portletArea = '#page-tools .sidebar-inner';
-		Twinkle.defaultConfig.portletId = 'p-twinkle';
-		Twinkle.defaultConfig.portletName = 'Twinkle';
-		Twinkle.defaultConfig.portletType = null;
-		Twinkle.defaultConfig.portletNext = 'p-userpagetools';
+		Twinkle.defaultConfig.twinkle.portletArea = '#page-tools .sidebar-inner';
+		Twinkle.defaultConfig.twinkle.portletId = 'p-twinkle';
+		Twinkle.defaultConfig.twinkle.portletName = 'Twinkle';
+		Twinkle.defaultConfig.twinkle.portletType = null;
+		Twinkle.defaultConfig.twinkle.portletNext = 'p-userpagetools';
 		break;
 	default:
-		Twinkle.defaultConfig.portletArea = null;
-		Twinkle.defaultConfig.portletId = 'p-cactions';
-		Twinkle.defaultConfig.portletName = null;
-		Twinkle.defaultConfig.portletType = null;
-		Twinkle.defaultConfig.portletNext = null;
+		Twinkle.defaultConfig.twinkle.portletArea = null;
+		Twinkle.defaultConfig.twinkle.portletId = 'p-cactions';
+		Twinkle.defaultConfig.twinkle.portletName = null;
+		Twinkle.defaultConfig.twinkle.portletType = null;
+		Twinkle.defaultConfig.twinkle.portletNext = null;
 }
 
 Twinkle.defaultConfig.friendly = {
