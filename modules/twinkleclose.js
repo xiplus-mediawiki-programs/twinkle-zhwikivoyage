@@ -1,8 +1,8 @@
-//<nowiki>
+// <nowiki>
 // vim: set noet sts=0 sw=8:
 
 
-(function($){
+(function($) {
 
 
 /*
@@ -15,14 +15,14 @@
  */
 
 Twinkle.close = function twinkleclose() {
-	if ( !Morebits.userIsInGroup('sysop') || !(/^Wikivoyage:删除表决$/.test(mw.config.get('wgPageName'))) ) {
+	if (!Morebits.userIsInGroup('sysop') || !/^Wikivoyage:删除表决$/.test(mw.config.get('wgPageName'))) {
 		return;
 	}
 
-	var spanTag = function( color, content ) {
-		var span = document.createElement( 'span' );
+	var spanTag = function(color, content) {
+		var span = document.createElement('span');
 		span.style.color = color;
-		span.appendChild( document.createTextNode( content ) );
+		span.appendChild(document.createTextNode(content));
 		return span;
 	};
 
@@ -31,9 +31,9 @@ Twinkle.close = function twinkleclose() {
 
 	var delNode = document.createElement('strong');
 	var delLink = document.createElement('a');
-	delLink.appendChild( spanTag( 'Black', '[' ) );
-	delLink.appendChild( spanTag( 'Red', wgULS('关闭讨论', '關閉討論') ) );
-	delLink.appendChild( spanTag( 'Black', ']' ) );
+	delLink.appendChild(spanTag('Black', '['));
+	delLink.appendChild(spanTag('Red', wgULS('关闭讨论', '關閉討論')));
+	delLink.appendChild(spanTag('Black', ']'));
 	delNode.appendChild(delLink);
 
 	titles.each(function(key, current) {
@@ -41,22 +41,21 @@ Twinkle.close = function twinkleclose() {
 		var title;
 		if (headlinehref.indexOf('redlink=1') === -1) {
 			title = headlinehref.slice(6);
-		}
-		else {
+		} else {
 			title = headlinehref.slice(19, -22);
 		}
 		title = decodeURIComponent(title);
 		var pagenotexist = $(current).find('.mw-headline a').hasClass('new');
 		var section = /section=(\d+)/.exec($(current).find('.mw-editsection a').attr('href'))[1];
 		var node = current.getElementsByClassName('mw-headline')[0];
-		node.appendChild( document.createTextNode(' ') );
-		var tmpNode = delNode.cloneNode( true );
+		node.appendChild(document.createTextNode(' '));
+		var tmpNode = delNode.cloneNode(true);
 		tmpNode.firstChild.href = '#' + section;
 		$(tmpNode.firstChild).click(function() {
 			Twinkle.close.callback(title, section, pagenotexist);
 			return false;
 		});
-		node.appendChild( tmpNode );
+		node.appendChild(tmpNode);
 	});
 };
 
@@ -299,7 +298,7 @@ Twinkle.close.codes = wgULS({
 			action: 'noop'
 		},
 		'twt': {
-			label:'轉移至維基詞典',
+			label: '轉移至維基詞典',
 			action: 'noop'
 		},
 		'two': {
@@ -332,27 +331,27 @@ Twinkle.close.codes = wgULS({
 });
 
 Twinkle.close.callback = function twinklecloseCallback(title, section, noop) {
-	var Window = new Morebits.simpleWindow( 400, 150 );
-	Window.setTitle( wgULS("关闭删除表决 \u00B7 ", "關閉刪除表決 \u00B7 ") + title );
-	Window.setScriptName( "Twinkle" );
-	Window.addFooterLink( wgULS("Twinkle帮助", "Twinkle幫助"), "w:WP:TW/DOC#close" );
+	var Window = new Morebits.simpleWindow(400, 150);
+	Window.setTitle(wgULS('关闭删除表决 \u00B7 ', '關閉刪除表決 \u00B7 ') + title);
+	Window.setScriptName('Twinkle');
+	Window.addFooterLink(wgULS('Twinkle帮助', 'Twinkle幫助'), 'w:WP:TW/DOC#close');
 
-	var form = new Morebits.quickForm( Twinkle.close.callback.evaluate );
+	var form = new Morebits.quickForm(Twinkle.close.callback.evaluate);
 
-	form.append( {
+	form.append({
 		type: 'select',
 		label: wgULS('处理结果：', '處理結果：'),
 		name: 'sub_group',
 		event: Twinkle.close.callback.change_code
-	} );
+	});
 
-	form.append( {
-			type: 'input',
-			name: 'remark',
-			label: wgULS('补充说明：', '補充說明：')
-	} );
+	form.append({
+		type: 'input',
+		name: 'remark',
+		label: wgULS('补充说明：', '補充說明：')
+	});
 
-	form.append( {
+	form.append({
 		type: 'checkbox',
 		list: [
 			{
@@ -362,12 +361,12 @@ Twinkle.close.callback = function twinklecloseCallback(title, section, noop) {
 				checked: noop
 			}
 		]
-	} );
+	});
 
-	form.append( { type:'submit' } );
+	form.append({ type: 'submit' });
 
 	var result = form.render();
-	Window.setContent( result );
+	Window.setContent(result);
 	Window.display();
 
 	var sub_group = result.getElementsByTagName('select')[0]; // hack
@@ -376,58 +375,57 @@ Twinkle.close.callback = function twinklecloseCallback(title, section, noop) {
 		title: title,
 		section: parseInt(section),
 		noop: noop
-	}
-	$(result).data("resultData", resultData);
+	};
+	$(result).data('resultData', resultData);
 	// worker function to create the combo box entries
-	var createEntries = function( contents, container ) {
-		$.each( contents, function( itemKey, itemProperties ) {
-			var key = (typeof itemKey === "string") ? itemKey : itemProperties.value;
+	var createEntries = function(contents, container) {
+		$.each(contents, function(itemKey, itemProperties) {
+			var key = typeof itemKey === 'string' ? itemKey : itemProperties.value;
 
-			var elem = new Morebits.quickForm.element( {
+			var elem = new Morebits.quickForm.element({
 				type: 'option',
 				label: key + '：' + itemProperties.label,
 				value: key,
 				selected: itemProperties.selected
-			} );
-			var elemRendered = container.appendChild( elem.render() );
-			$(elemRendered).data("messageData", itemProperties);
-		} );
+			});
+			var elemRendered = container.appendChild(elem.render());
+			$(elemRendered).data('messageData', itemProperties);
+		});
 	};
 
-	$.each( Twinkle.close.codes, function( groupLabel, groupContents ) {
-		var optgroup = new Morebits.quickForm.element( {
+	$.each(Twinkle.close.codes, function(groupLabel, groupContents) {
+		var optgroup = new Morebits.quickForm.element({
 			type: 'optgroup',
 			label: groupLabel
-		} );
+		});
 		optgroup = optgroup.render();
-		sub_group.appendChild( optgroup );
+		sub_group.appendChild(optgroup);
 		// create the options
-		createEntries( groupContents, optgroup );
-	} );
+		createEntries(groupContents, optgroup);
+	});
 
-	var evt = document.createEvent( "Event" );
-	evt.initEvent( 'change', true, true );
-	result.sub_group.dispatchEvent( evt );
+	var evt = document.createEvent('Event');
+	evt.initEvent('change', true, true);
+	result.sub_group.dispatchEvent(evt);
 };
 
 Twinkle.close.callback.change_code = function twinklecloseCallbackChangeCode(e) {
-	var resultData = $(e.target.form).data("resultData");
-	var messageData = $(e.target).find('option[value="' + e.target.value + '"]').data("messageData");
+	var resultData = $(e.target.form).data('resultData');
+	var messageData = $(e.target).find('option[value="' + e.target.value + '"]').data('messageData');
 	var noop = e.target.form.noop;
 	if (resultData.noop || messageData.action === 'noop') {
 		noop.checked = true;
 		noop.disabled = true;
-	}
-	else {
+	} else {
 		noop.checked = false;
 		noop.disabled = false;
 	}
-}
+};
 
 Twinkle.close.callback.evaluate = function twinklecloseCallbackEvaluate(e) {
 	var code = e.target.sub_group.value;
 	var resultData = $(e.target).data('resultData');
-	var messageData = $(e.target.sub_group).find('option[value="' + code + '"]').data("messageData");
+	var messageData = $(e.target.sub_group).find('option[value="' + code + '"]').data('messageData');
 	var noop = e.target.noop.checked;
 	var params = {
 		title: resultData.title,
@@ -437,27 +435,26 @@ Twinkle.close.callback.evaluate = function twinklecloseCallbackEvaluate(e) {
 		messageData: messageData
 	};
 
-	Morebits.simpleWindow.setButtonsEnabled( false );
-	Morebits.status.init( e.target );
+	Morebits.simpleWindow.setButtonsEnabled(false);
+	Morebits.status.init(e.target);
 
-	Morebits.wiki.actionCompleted.notice = "操作完成";
+	Morebits.wiki.actionCompleted.notice = '操作完成';
 
 	if (noop || messageData.action === 'noop') {
-		Twinkle.close.callbacks.talkend( params );
-	}
-	else {
+		Twinkle.close.callbacks.talkend(params);
+	} else {
 		switch (messageData.action) {
 			case 'del':
 				Twinkle.close.callbacks.del(params);
 				break;
 			case 'keep':
-				var wikipedia_page = new Morebits.wiki.page( params.title, wgULS('移除删除表决模板', '移除刪除表決模板') );
-				wikipedia_page.setCallbackParameters( params );
-				wikipedia_page.load( Twinkle.close.callbacks.keep );
+				var wikipedia_page = new Morebits.wiki.page(params.title, wgULS('移除删除表决模板', '移除刪除表決模板'));
+				wikipedia_page.setCallbackParameters(params);
+				wikipedia_page.load(Twinkle.close.callbacks.keep);
 				break;
 			default:
-				alert(wgULS("Twinkle.close：未定义 ", "Twinkle.close：未定義 ") + code);
-				return;
+				alert(wgULS('Twinkle.close：未定义 ', 'Twinkle.close：未定義 ') + code);
+
 		}
 	}
 };
@@ -466,12 +463,12 @@ Twinkle.close.callbacks = {
 	del: function (params) {
 		Morebits.wiki.addCheckpoint();
 
-		var page = new Morebits.wiki.page( params.title, wgULS("删除页面", "刪除頁面") );
+		var page = new Morebits.wiki.page(params.title, wgULS('删除页面', '刪除頁面'));
 
-		page.setEditSummary( wgULS('删除表决通过：[[Special:永久链接/', '刪除表決通過：[[Special:永久鏈接/') + mw.config.get('wgRevisionId') + wgULS(']]', ']]') + Twinkle.getPref('deletionSummaryAd') );
+		page.setEditSummary(wgULS('删除表决通过：[[Special:永久链接/', '刪除表決通過：[[Special:永久鏈接/') + mw.config.get('wgRevisionId') + wgULS(']]', ']]') + Twinkle.getPref('deletionSummaryAd'));
 		page.deletePage(function() {
-			page.getStatusElement().info("完成");
-			Twinkle.close.callbacks.talkend( params );
+			page.getStatusElement().info('完成');
+			Twinkle.close.callbacks.talkend(params);
 		});
 		Morebits.wiki.removeCheckpoint();
 	},
@@ -479,7 +476,7 @@ Twinkle.close.callbacks = {
 		var statelem = pageobj.getStatusElement();
 
 		if (!pageobj.exists()) {
-			statelem.error( wgULS("页面不存在，可能已被删除", "頁面不存在，可能已被刪除") );
+			statelem.error(wgULS('页面不存在，可能已被删除', '頁面不存在，可能已被刪除'));
 			return;
 		}
 
@@ -487,7 +484,7 @@ Twinkle.close.callbacks = {
 		var params = pageobj.getCallbackParameters();
 
 		var pagetitle = mw.Title.newFromText(params.title);
-		/*if (pagetitle.getNamespaceId() % 2 === 0) {
+		/* if (pagetitle.getNamespaceId() % 2 === 0) {
 			var talkpagetitle = new mw.Title(pagetitle.getMainText(), pagetitle.getNamespaceId() + 1);
 			var talkpage = new Morebits.wiki.page(talkpagetitle.toString(), '标记讨论页');
 			var vfdkept = '{{vfd-kept|' + mw.config.get('wgPageName').split('/').slice(2).join('/') + '|' + params.messageData.label + '}}\n';
@@ -495,12 +492,12 @@ Twinkle.close.callbacks = {
 			talkpage.setEditSummary('[[' + mw.config.get('wgPageName') + ']]：' + params.messageData.label + Twinkle.getPref('summaryAd'));
 			talkpage.setCreateOption('recreate');
 			talkpage.prepend();
-		}*/
+		} */
 
 		var newtext = text.replace(/\{\{(vfd)(?:\|[^{}]*?)?\}\}\n*/gi, '');
 		if (newtext === text) {
-			statelem.warn(wgULS("未找到删除表决模板，可能已被移除", "未找到刪除表決模板，可能已被移除"));
-			Twinkle.close.callbacks.talkend( params );
+			statelem.warn(wgULS('未找到删除表决模板，可能已被移除', '未找到刪除表決模板，可能已被移除'));
+			Twinkle.close.callbacks.talkend(params);
 			return;
 		}
 		var editsummary = wgULS('删除表决关闭：[[', '刪除表決關閉：[[') + mw.config.get('wgPageName') + wgULS(']]', ']]');
@@ -512,7 +509,7 @@ Twinkle.close.callbacks = {
 	},
 	keepComplete: function (pageobj) {
 		var params = pageobj.getCallbackParameters();
-		Twinkle.close.callbacks.talkend( params );
+		Twinkle.close.callbacks.talkend(params);
 	},
 
 	talkend: function (params) {
@@ -527,7 +524,7 @@ Twinkle.close.callbacks = {
 		var params = pageobj.getCallbackParameters();
 
 		if (text.indexOf('{{discussion top') !== -1) {
-			statelem.error( wgULS("讨论已被关闭", "討論已被關閉") );
+			statelem.error(wgULS('讨论已被关闭', '討論已被關閉'));
 			return;
 		}
 
@@ -540,14 +537,13 @@ Twinkle.close.callbacks = {
 		var split = bar[0].split('\n');
 
 		text = split[0] + '\n{{discussion top}}\n' + split.slice(1).join('\n');
-		text += "\n----\n: '''" + (params.messageData.action == 'del' ? wgULS('已删除', '已刪除') : wgULS('未删除', '未刪除')) + "'''"
+		text += "\n----\n: '''" + (params.messageData.action === 'del' ? wgULS('已删除', '已刪除') : wgULS('未删除', '未刪除')) + "'''";
 		if (['d', 'k'].indexOf(params.messageData.code) === -1) {
 			text += '：' + params.messageData.label;
 		}
 		if (params.remark) {
 			text += '，' + params.remark;
-		}
-		else {
+		} else {
 			text += '。';
 		}
 		text += '--~~~~\n{{discussion bottom}}';
@@ -573,9 +569,9 @@ Twinkle.close.callbacks = {
 		var params = pageobj.getCallbackParameters();
 		$('strong a[href=#' + params.section + '] span').css('color', 'grey');
 	}
-}
+};
 
 })(jQuery);
 
 
-//</nowiki>
+// </nowiki>
