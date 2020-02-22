@@ -91,18 +91,27 @@ Twinkle.defaultConfig.twinkle = {
 };
 
 // now some skin dependent config.
-if (mw.config.get('skin') === 'vector') {
-	Twinkle.defaultConfig.twinkle.portletArea = 'right-navigation';
-	Twinkle.defaultConfig.twinkle.portletId = 'p-twinkle';
-	Twinkle.defaultConfig.twinkle.portletName = 'TW';
-	Twinkle.defaultConfig.twinkle.portletType = 'menu';
-	Twinkle.defaultConfig.twinkle.portletNext = 'p-search';
-} else {
-	Twinkle.defaultConfig.twinkle.portletArea = null;
-	Twinkle.defaultConfig.twinkle.portletId = 'p-cactions';
-	Twinkle.defaultConfig.twinkle.portletName = null;
-	Twinkle.defaultConfig.twinkle.portletType = null;
-	Twinkle.defaultConfig.twinkle.portletNext = null;
+switch (mw.config.get('skin')) {
+	case 'vector':
+		Twinkle.defaultConfig.portletArea = 'right-navigation';
+		Twinkle.defaultConfig.portletId = 'p-twinkle';
+		Twinkle.defaultConfig.portletName = 'TW';
+		Twinkle.defaultConfig.portletType = 'menu';
+		Twinkle.defaultConfig.portletNext = 'p-search';
+		break;
+	case 'timeless':
+		Twinkle.defaultConfig.portletArea = '#page-tools .sidebar-inner';
+		Twinkle.defaultConfig.portletId = 'p-twinkle';
+		Twinkle.defaultConfig.portletName = 'Twinkle';
+		Twinkle.defaultConfig.portletType = null;
+		Twinkle.defaultConfig.portletNext = 'p-userpagetools';
+		break;
+	default:
+		Twinkle.defaultConfig.portletArea = null;
+		Twinkle.defaultConfig.portletId = 'p-cactions';
+		Twinkle.defaultConfig.portletName = null;
+		Twinkle.defaultConfig.portletType = null;
+		Twinkle.defaultConfig.portletNext = null;
 }
 
 Twinkle.defaultConfig.friendly = {
@@ -195,7 +204,7 @@ Twinkle.getFriendlyPref = function twinkleGetFriendlyPref(name) {
  */
 Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	// sanity checks, and get required DOM nodes
-	var root = document.getElementById(navigation);
+	var root = document.getElementById(navigation) || document.querySelector(navigation);
 	if (!root) {
 		return null;
 	}
@@ -215,33 +224,38 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 
 	// verify/normalize input
 	var skin = mw.config.get('skin');
-	type = skin === 'vector' && type === 'menu' && (navigation === 'left-navigation' || navigation === 'right-navigation') ? 'menu' : '';
-	var outerDivClass;
-	var innerDivClass;
+	if (skin !== 'vector' || (navigation !== 'left-navigation' && navigation !== 'right-navigation')) {
+		type = null; // menu supported only in vector's #left-navigation & #right-navigation
+	}
+	var outerDivClass, innerDivClass;
 	switch (skin) {
 		case 'vector':
+			// XXX: portal doesn't work
 			if (navigation !== 'portal' && navigation !== 'left-navigation' && navigation !== 'right-navigation') {
 				navigation = 'mw-panel';
 			}
-			outerDivClass = navigation === 'mw-panel' ? 'portal' : type === 'menu' ? 'vectorMenu' : 'vectorTabs' ;
-			innerDivClass = navigation === 'mw-panel' ? 'body' : type === 'menu' ? 'menu' : '' ;
+			outerDivClass = navigation === 'mw-panel' ? 'portal' : type === 'menu' ? 'vectorMenu' : 'vectorTabs';
 			break;
 		case 'modern':
 			if (navigation !== 'mw_portlets' && navigation !== 'mw_contentwrapper') {
 				navigation = 'mw_portlets';
 			}
 			outerDivClass = 'portlet';
-			innerDivClass = 'pBody';
+			break;
+		case 'timeless':
+			outerDivClass = 'mw-portlet';
+			innerDivClass = 'mw-portlet-body';
 			break;
 		default:
 			navigation = 'column-one';
 			outerDivClass = 'portlet';
-			innerDivClass = 'pBody';
 			break;
 	}
 
 	// Build the DOM elements.
 	var outerDiv = document.createElement('div');
+	outerDiv.setAttribute('role', 'navigation');
+	outerDiv.setAttribute('aria-labelledby', id + '-label');
 	outerDiv.className = outerDivClass + ' emptyPortlet';
 	outerDiv.id = id;
 	if (nextnode && nextnode.parentNode === root) {
@@ -251,7 +265,19 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	}
 
 	var h5 = document.createElement('h3');
-	if (type === 'menu') {
+	h5.id = id + '-label';
+	var ul = document.createElement('ul');
+
+	if (outerDivClass === 'vectorMenu') {
+
+		// add invisible checkbox to keep menu open when clicked
+		// similar to the p-cactions ("More") menu
+		var chkbox = document.createElement('input');
+		chkbox.className = 'vectorMenuCheckbox';
+		chkbox.setAttribute('type', 'checkbox');
+		chkbox.setAttribute('aria-labelledby', id + '-label');
+		outerDiv.appendChild(chkbox);
+
 		var span = document.createElement('span');
 		span.appendChild(document.createTextNode(text));
 		h5.appendChild(span);
@@ -259,31 +285,36 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 		var a = document.createElement('a');
 		a.href = '#';
 
-		$(a).click(function (e) {
+		$(a).click(function(e) {
 			e.preventDefault();
-
 			if (!Twinkle.userAuthorized) {
 				alert('抱歉，您需达自动确认后方可使用Twinkle。');
 			}
 		});
 
 		h5.appendChild(a);
+		outerDiv.appendChild(h5);
+
+		ul.className = 'menu';
+		outerDiv.appendChild(ul);
+
 	} else {
+
 		h5.appendChild(document.createTextNode(text));
-	}
-	outerDiv.appendChild(h5);
+		outerDiv.appendChild(h5);
+		if (innerDivClass) {
+			var innerDiv = document.createElement('div');
+			innerDiv.className = innerDivClass;
+			innerDiv.appendChild(ul);
+			outerDiv.appendChild(innerDiv);
+		} else {
+			outerDiv.appendChild(ul);
+		}
 
-	var innerDiv;
-	if (type === 'menu') {
-		innerDiv = document.createElement('div');
-		innerDiv.className = innerDivClass;
-		outerDiv.appendChild(innerDiv);
 	}
-
-	var ul = document.createElement('ul');
-	(innerDiv || outerDiv).appendChild(ul);
 
 	return outerDiv;
+
 };
 
 
