@@ -603,7 +603,7 @@ Twinkle.config.sections = [
 
 Twinkle.config.init = function twinkleconfigInit() {
 
-	if (((mw.config.get('wgNamespaceNumber') === mw.config.get('wgNamespaceIds').project && mw.config.get('wgTitle') === wgULS('Twinkle/参数设置', 'Twinkle/參數設置')) ||
+	if (((mw.config.get('wgNamespaceNumber') === mw.config.get('wgNamespaceIds').project && mw.config.get('wgTitle') === 'Twinkle/参数设置') ||
 			(mw.config.get('wgNamespaceNumber') === mw.config.get('wgNamespaceIds').user && mw.config.get('wgTitle').lastIndexOf(wgULS('/Twinkle参数', '/Twinkle參數')) === (mw.config.get('wgTitle').length - 9))) &&
 			mw.config.get('wgAction') === 'view') {
 		// create the config page at Wikipedia:Twinkle/参数设置, and at user subpages (for testing purposes)
