@@ -465,7 +465,7 @@ Twinkle.close.callbacks = {
 
 		var page = new Morebits.wiki.page(params.title, wgULS('删除页面', '刪除頁面'));
 
-		page.setEditSummary(wgULS('删除表决通过：[[Special:永久链接/', '刪除表決通過：[[Special:永久鏈接/') + mw.config.get('wgRevisionId') + wgULS(']]', ']]') + Twinkle.getPref('deletionSummaryAd'));
+		page.setEditSummary('[[Special:PermanentLink/' + mw.config.get('wgRevisionId') + '|' + wgULS('删除表决通过', '刪除表決通過') + ']]' + Twinkle.getPref('deletionSummaryAd'));
 		page.deletePage(function() {
 			page.getStatusElement().info('完成');
 			Twinkle.close.callbacks.talkend(params);
