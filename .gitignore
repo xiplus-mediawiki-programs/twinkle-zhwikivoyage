@@ -21,5 +21,10 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
+
 # Linux
 *~
+
+# Node
+node_modules/
+npm-debug.log*
