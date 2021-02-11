@@ -372,7 +372,7 @@ $.ajax({
 		}
 
 		try {
-			var options = $.parseJSON(optionsText);
+			var options = JSON.parse(optionsText);
 
 			// Assuming that our options evolve, we will want to transform older versions:
 			// if ( options.optionsVersion === undefined ) {
