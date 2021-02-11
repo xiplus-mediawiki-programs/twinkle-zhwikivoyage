@@ -352,7 +352,7 @@ $.ajax({
 	dataType: 'text'
 })
 	.fail(function () {
-		mw.util.jsMessage('未能加载twinkleoptions.js');
+		mw.notify('未能加载twinkleoptions.js');
 	})
 	.done(function (optionsText) {
 
@@ -387,7 +387,7 @@ $.ajax({
 				Twinkle.prefs = options;
 			}
 		} catch (e) {
-			mw.util.jsMessage('未能解析twinkleoptions.js');
+			mw.notify('未能解析twinkleoptions.js');
 		}
 	})
 	.always(function () {
