@@ -1,13 +1,14 @@
 {
-  "title": "Twinkle",
-  "name": "twinkle",
-  "private": true,
-  "repository": "Xi-Plus/twinkle-zhwikivoyage",
-  "scripts": {
-    "lint": "eslint ."
-  },
-  "devDependencies": {
-    "eslint": "^7.6.0",
-    "eslint-plugin-es5": "^1.5.0"
-  }
+	"title": "Twinkle",
+	"name": "twinkle-zhwikivoyage",
+	"private": true,
+	"repository": "Xi-Plus/twinkle-zhwikivoyage",
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"devDependencies": {
+		"eslint": "^7.25.0",
+		"eslint-plugin-es5": "^1.5.0"
+	}
 }
