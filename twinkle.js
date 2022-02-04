@@ -96,6 +96,7 @@ Twinkle.defaultConfig.twinkle = {
 // now some skin dependent config.
 switch (mw.config.get('skin')) {
 	case 'vector':
+	case 'vector-2022':
 		Twinkle.defaultConfig.twinkle.portletArea = 'right-navigation';
 		Twinkle.defaultConfig.twinkle.portletId = 'p-twinkle';
 		Twinkle.defaultConfig.twinkle.portletName = 'TW';

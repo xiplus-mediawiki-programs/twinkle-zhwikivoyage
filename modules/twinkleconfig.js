@@ -1015,7 +1015,7 @@ Twinkle.config.init = function twinkleconfigInit() {
 			box.appendChild(document.createTextNode(wgULS('，或直接编辑本页。', '，或直接編輯本頁。')));
 			$(box).insertAfter($('#contentSub'));
 
-		} else if (['monobook', 'vector', 'cologneblue', 'modern', 'common'].indexOf(scriptPageName) !== -1) {
+		} else if (['monobook', 'vector', 'vector-2022', 'cologneblue', 'modern', 'common'].indexOf(scriptPageName) !== -1) {
 			// place "Looking for Twinkle options?" notice
 			box.style.width = '60%';
 
