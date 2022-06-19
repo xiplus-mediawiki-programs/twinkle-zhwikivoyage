@@ -28,7 +28,7 @@ Twinkle.diff = function twinklediff() {
 	Twinkle.addPortletLink(mw.util.wikiScript('index') + '?' + $.param(query), wgULS('最后', '最後'), 'tw-lastdiff', wgULS('显示最后修改', '顯示最後修改'));
 
 	// Show additional tabs only on diff pages
-	if (Morebits.queryString.exists('diff')) {
+	if (mw.util.getParamValue('diff')) {
 		Twinkle.addPortletLink(function() {
 			Twinkle.diff.evaluate(false);
 		}, '自上', 'tw-since', wgULS('显示与上一修订版本间的差异', '顯示與上一修訂版本間的差異'));
@@ -88,7 +88,7 @@ Twinkle.diff.callbacks = {
 			'oldid': revid,
 			'diff': mw.config.get('wgCurRevisionId')
 		};
-		window.location = mw.util.wikiScript('index') + '?' + Morebits.queryString.create(query);
+		window.location = mw.util.wikiScript('index') + '?' + $.param(query);
 	}
 };
 })(jQuery);

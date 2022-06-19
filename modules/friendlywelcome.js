@@ -15,8 +15,8 @@
  */
 
 Twinkle.welcome = function friendlywelcome() {
-	if (Morebits.queryString.exists('friendlywelcome')) {
-		if (Morebits.queryString.get('friendlywelcome') === 'auto') {
+	if (mw.util.getParamValue('friendlywelcome')) {
+		if (mw.util.getParamValue('friendlywelcome') === 'auto') {
 			Twinkle.welcome.auto();
 		} else {
 			Twinkle.welcome.semiauto();
@@ -27,7 +27,7 @@ Twinkle.welcome = function friendlywelcome() {
 };
 
 Twinkle.welcome.auto = function() {
-	if (Morebits.queryString.get('action') !== 'edit') {
+	if (mw.util.getParamValue('action') !== 'edit') {
 		// userpage not empty, aborting auto-welcome
 		return;
 	}
@@ -40,7 +40,7 @@ Twinkle.welcome.semiauto = function() {
 };
 
 Twinkle.welcome.normal = function() {
-	if (Morebits.queryString.exists('diff')) {
+	if (mw.util.getParamValue('diff')) {
 		// check whether the contributors' talk pages exist yet
 		var $oList = $('#mw-diff-otitle2').find('span.mw-usertoollinks a.new:contains(讨论)').first();
 		var $nList = $('#mw-diff-ntitle2').find('span.mw-usertoollinks a.new:contains(讨论)').first();
@@ -64,7 +64,7 @@ Twinkle.welcome.normal = function() {
 				var oHref = $oList.attr('href');
 
 				var oWelcomeNode = welcomeNode.cloneNode(true);
-				oWelcomeNode.firstChild.setAttribute('href', oHref + '&' + Morebits.queryString.create({
+				oWelcomeNode.firstChild.setAttribute('href', oHref + '&' + $.param({
 					'friendlywelcome': Twinkle.getFriendlyPref('quickWelcomeMode') === 'auto' ? 'auto' : 'norm',
 					'vanarticle': Morebits.pageNameNorm
 				}));
@@ -76,7 +76,7 @@ Twinkle.welcome.normal = function() {
 				var nHref = $nList.attr('href');
 
 				var nWelcomeNode = welcomeNode.cloneNode(true);
-				nWelcomeNode.firstChild.setAttribute('href', nHref + '&' + Morebits.queryString.create({
+				nWelcomeNode.firstChild.setAttribute('href', nHref + '&' + $.param({
 					'friendlywelcome': Twinkle.getFriendlyPref('quickWelcomeMode') === 'auto' ? 'auto' : 'norm',
 					'vanarticle': Morebits.pageNameNorm
 				}));
@@ -98,7 +98,7 @@ Twinkle.welcome.welcomeUser = function welcomeUser() {
 
 	var params = {
 		value: Twinkle.getFriendlyPref('quickWelcomeTemplate'),
-		article: Morebits.queryString.exists('vanarticle') ? Morebits.queryString.get('vanarticle') : '',
+		article: mw.util.getParamValue('vanarticle') || '',
 		mode: 'auto'
 	};
 
@@ -143,7 +143,7 @@ Twinkle.welcome.callback = function friendlywelcomeCallback(uid) {
 		type: 'input',
 		name: 'article',
 		label: wgULS('* 条目名（如模板支持）', '* 條目名（如模板支援）'),
-		value: Morebits.queryString.exists('vanarticle') ? Morebits.queryString.get('vanarticle') : '',
+		value: mw.util.getParamValue('vanarticle') || '',
 		tooltip: wgULS('如果模板支持，您可在此处加入一个条目名。支持的模板已用星号标记出来。', '如果模板支援，您可在此處加入一個條目名。支援的模板已用星號標記出來。')
 	});
 

@@ -20,7 +20,7 @@
 
 Twinkle.fluff = {
 	auto: function() {
-		if (parseInt(Morebits.queryString.get('oldid'), 10) !== mw.config.get('wgCurRevisionId')) {
+		if (parseInt(mw.util.getParamValue('oldid'), 10) !== mw.config.get('wgCurRevisionId')) {
 			// not latest revision
 			alert(wgULS('无法回退，页面在此期间已被修改。', '無法回退，頁面在此期間已被修改。'));
 			return;
@@ -28,7 +28,7 @@ Twinkle.fluff = {
 
 		var vandal = $('#mw-diff-ntitle2').find('a.mw-userlink').text();
 
-		Twinkle.fluff.revert(Morebits.queryString.get('twinklerevert'), vandal, true);
+		Twinkle.fluff.revert(mw.util.getParamValue('twinklerevert'), vandal, true);
 	},
 	normal: function() {
 
@@ -67,11 +67,11 @@ Twinkle.fluff = {
 						var href = $(current).children('a:eq(1)').attr('href');
 						current.appendChild(document.createTextNode(' '));
 						var tmpNode = revNode.cloneNode(true);
-						tmpNode.firstChild.setAttribute('href', href + '&' + Morebits.queryString.create({ 'twinklerevert': 'norm' }));
+						tmpNode.firstChild.setAttribute('href', href + '&' + $.param({ 'twinklerevert': 'norm' }));
 						current.appendChild(tmpNode);
 						current.appendChild(document.createTextNode(' '));
 						tmpNode = revVandNode.cloneNode(true);
-						tmpNode.firstChild.setAttribute('href', href + '&' + Morebits.queryString.create({ 'twinklerevert': 'vand' }));
+						tmpNode.firstChild.setAttribute('href', href + '&' + $.param({ 'twinklerevert': 'vand' }));
 						current.appendChild(tmpNode);
 					});
 				}
@@ -470,16 +470,16 @@ Twinkle.fluff.callbacks = {
 
 			switch (Twinkle.getPref('userTalkPageMode')) {
 				case 'tab':
-					window.open(mw.util.wikiScript('index') + '?' + Morebits.queryString.create(query), '_blank');
+					window.open(mw.util.wikiScript('index') + '?' + $.param(query), '_blank');
 					break;
 				case 'blank':
-					window.open(mw.util.wikiScript('index') + '?' + Morebits.queryString.create(query), '_blank',
+					window.open(mw.util.wikiScript('index') + '?' + $.param(query), '_blank',
 						'location=no,toolbar=no,status=no,directories=no,scrollbars=yes,width=1200,height=800');
 					break;
 				case 'window':
 				/* falls through */
 				default:
-					window.open(mw.util.wikiScript('index') + '?' + Morebits.queryString.create(query),
+					window.open(mw.util.wikiScript('index') + '?' + $.param(query),
 						window.name === 'twinklewarnwindow' ? '_blank' : 'twinklewarnwindow',
 						'location=no,toolbar=no,status=no,directories=no,scrollbars=yes,width=1200,height=800');
 					break;
@@ -571,7 +571,7 @@ Twinkle.fluff.init = function twinklefluffinit() {
 			'SineBot'
 		*/];
 
-		if (Morebits.queryString.exists('twinklerevert')) {
+		if (mw.util.getParamValue('twinklerevert')) {
 			Twinkle.fluff.auto();
 		} else {
 			Twinkle.fluff.normal();
