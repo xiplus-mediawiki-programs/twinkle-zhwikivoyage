@@ -1,5 +1,5 @@
 .mediawiki-bot-*
-twinkle.js
+.twinklerc
 /.settings
 /.project
 jsl.conf
@@ -21,9 +21,6 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
-
-# Linux
-*~
 
 # Node
 node_modules/
