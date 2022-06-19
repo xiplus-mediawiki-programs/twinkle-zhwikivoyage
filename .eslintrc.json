@@ -7,9 +7,10 @@
 		"jquery": true
 	},
 	"globals": {
-		"mw": true,
-		"moment": true,
-		"wgULS": true
+		"mw": "readonly",
+		"moment": "readonly",
+		"wgULS": "readonly",
+		"Map": "readonly"
 	},
 	"ignorePatterns": "select2*",
 	"rules": {
