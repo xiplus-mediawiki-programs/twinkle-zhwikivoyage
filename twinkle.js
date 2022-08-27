@@ -53,11 +53,15 @@ Twinkle.defaultConfig.twinkle = {
 	// Fluff (revert and rollback)
 	openTalkPage: [ ],
 	openTalkPageOnAutoRevert: false,
+	rollbackInPlace: false,
 	markRevertedPagesAsMinor: [ 'vand' ],
-	watchRevertedPages: [ ],
+	watchRevertedPages: [ 'agf', 'norm', 'vand', 'torev' ],
+	watchRevertedExpiry: 'yes',
 	offerReasonOnNormalRevert: true,
 	confirmOnFluff: false,
+	confirmOnMobileFluff: true,
 	showRollbackLinks: [ 'diff', 'others' ],
+	customRevertSummary: [],
 	// CSD
 	speedySelectionStyle: 'buttonClick',
 	watchSpeedyPages: [ ],
@@ -203,7 +207,7 @@ Twinkle.getFriendlyPref = function twinkleGetFriendlyPref(name) {
  *
  * @return Node -- the DOM node of the new item (a DIV element) or null
  */
- Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
+Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	// sanity checks, and get required DOM nodes
 	var root = document.getElementById(navigation) || document.querySelector(navigation);
 	if (!root) {
@@ -434,7 +438,6 @@ Twinkle.load = function () {
 	Twinkle.diff();
 	Twinkle.unlink();
 	Twinkle.config.init();
-	Twinkle.fluff.init();
 	if (Morebits.userIsInGroup('sysop')) {
 		Twinkle.close();
 	}

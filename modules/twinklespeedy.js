@@ -430,7 +430,7 @@ Twinkle.speedy.callbacks = {
 			if (params.openusertalk) {
 				thispage = new Morebits.wiki.page(mw.config.get('wgPageName'));  // a necessary evil, in order to clear incorrect status text
 				thispage.setCallbackParameters(params);
-				thispage.lookupCreator(Twinkle.speedy.callbacks.sysop.openUserTalkPage);
+				thispage.lookupCreation(Twinkle.speedy.callbacks.sysop.openUserTalkPage);
 			}
 
 			// delete page
@@ -721,7 +721,7 @@ Twinkle.speedy.callbacks = {
 					}
 				};
 				var thispage = new Morebits.wiki.page(Morebits.pageNameNorm);
-				thispage.lookupCreator(callback);
+				thispage.lookupCreation(callback);
 			} else if (params.lognomination) {
 				// or, if not notifying, add this nomination to the user's userspace log without the initial contributor's name
 				Twinkle.speedy.callbacks.user.addToLog(params, null);

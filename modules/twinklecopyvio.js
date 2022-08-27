@@ -63,7 +63,7 @@ Twinkle.copyvio.callback = function twinklecopyvioCallback() {
 
 Twinkle.copyvio.callbacks = {
 	main: function(pageobj) {
-		// this is coming in from lookupCreator...!
+		// this is coming in from lookupCreation...!
 		var params = pageobj.getCallbackParameters();
 		var initialContrib = pageobj.getCreator();
 
@@ -167,7 +167,7 @@ Twinkle.copyvio.callback.evaluate = function(e) {
 	// Contributor specific edits
 	wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'));
 	wikipedia_page.setCallbackParameters(params);
-	wikipedia_page.lookupCreator(Twinkle.copyvio.callbacks.main);
+	wikipedia_page.lookupCreation(Twinkle.copyvio.callbacks.main);
 
 	Morebits.wiki.removeCheckpoint();
 };

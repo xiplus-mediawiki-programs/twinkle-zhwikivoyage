@@ -23,6 +23,16 @@
 
 Twinkle.config = {};
 
+Twinkle.config.watchlistEnums = {
+	'yes': wgULS('永久加入到监视列表', '永久加入到監視清單'),
+	'no': wgULS('不加入到监视列表', '不加入到監視清單'),
+	'default': wgULS('遵守站点设置', '遵守站點設定'),
+	'1 week': wgULS('加入到监视列表1周', '加入到監視清單1週'),
+	'1 month': wgULS('加入到监视列表1个月', '加入到監視清單1個月'),
+	'3 months': wgULS('加入到监视列表3个月', '加入到監視清單3個月'),
+	'6 months': wgULS('加入到监视列表6个月', '加入到監視清單6個月')
+};
+
 Twinkle.config.commonEnums = {
 	watchlist: { yes: wgULS('添加到监视列表', '添加到監視列表'), no: wgULS('不添加到监视列表', '不添加到監視列表'), 'default': wgULS('遵守站点设置', '遵守站點設置') },
 	talkPageMode: { window: wgULS('在窗口中，替换其它用户对话页', '在窗口中,替換其他用戶對話頁'), tab: wgULS('在新标签页中', '在新標籤頁中'), blank: wgULS('在全新的窗口中', '在全新的窗口中') }
@@ -153,21 +163,39 @@ Twinkle.config.sections = [
 	{
 		title: '回退',  // twinklefluff module
 		preferences: [
-		// TwinkleConfig.openTalkPage (array)
-		// What types of actions that should result in opening of talk page
+			// TwinkleConfig.autoMenuAfterRollback (bool)
+			// Option to automatically open the warning menu if the user talk page is opened post-reversion
+			{
+				name: 'autoMenuAfterRollback',
+				label: wgULS('在Twinkle回退后自动打开用户讨论页上的Twinkle警告菜单', '在Twinkle回退後自動打開使用者討論頁上的Twinkle警告選單'),
+				helptip: wgULS('仅在选取下方对应框时才执行', '僅在選取下方對應框時才執行'),
+				type: 'boolean'
+			},
+
+			// TwinkleConfig.openTalkPage (array)
+			// What types of actions that should result in opening of talk page
 			{
 				name: 'openTalkPage',
-				label: wgULS('在这些类型的回退后打开用户对话页', '在這些類型的回退後打開用戶對話頁'),
+				label: wgULS('在这些类型的回退后打开用户讨论页', '在這些類別的回退後打開使用者討論頁'),
 				type: 'set',
-				setValues: { agf: '善意回退', norm: wgULS('常规回退', '正規回退'), vand: wgULS('破坏回退', '破壞回退'), torev: wgULS('“恢复此版本”', '“恢復此版本”') }
+				setValues: { agf: '善意回退', norm: wgULS('常规回退', '常規回退'), vand: wgULS('破坏回退', '破壞回退') }
 			},
 
 			// TwinkleConfig.openTalkPageOnAutoRevert (bool)
-			// Defines if talk page should be opened when calling revert from contrib page, because from there, actions may be multiple, and opening talk page not suitable. If set to true, openTalkPage defines then if talk page will be opened.
+			// Defines if talk page should be opened when calling revert from contribs or recent changes pages. If set to true, openTalkPage defines then if talk page will be opened.
 			{
 				name: 'openTalkPageOnAutoRevert',
-				label: wgULS('在从用户贡献中发起回退时打开用户对话页', '在從用戶貢獻中發起回退時打開用戶對話頁'),
-				helptip: wgULS('您经常会在破坏者的用户贡献中发起许多回退，总是打开用户对话页可能不太适当，所以这个选项默认关闭。当它被打开时，依赖上一个设定。', '您經常會在破壞者的用戶貢獻中發起許多回退，總是打開用戶對話頁可能不太適當，所以這個選項默認關閉。當它被打開時，依賴上一個設定。'),
+				label: wgULS('在从用户贡献及最近更改中发起回退时打开用户讨论页', '在從使用者貢獻及近期變更中發起回退時打開使用者討論頁'),
+				helptip: wgULS('当它打开时，依赖上一个设置。', '當它打開時，依賴上一個設定。'),
+				type: 'boolean'
+			},
+
+			// TwinkleConfig.rollbackInPlace (bool)
+			//
+			{
+				name: 'rollbackInPlace',
+				label: wgULS('在从用户贡献及最近更改中发起回退时不刷新页面', '在從使用者貢獻及近期變更中發起回退時不重新整理頁面'),
+				helptip: wgULS('当它打开时，Twinkle将不会在从用户贡献及最近更改中发起回退时刷新页面，允许您一次性回退多个编辑。', '當它打開時，Twinkle將不會在從使用者貢獻及近期變更中發起回退時重新整理頁面，允許您一次性回退多個編輯。'),
 				type: 'boolean'
 			},
 
@@ -175,44 +203,68 @@ Twinkle.config.sections = [
 			// What types of actions that should result in marking edit as minor
 			{
 				name: 'markRevertedPagesAsMinor',
-				label: wgULS('将这些类型的回退标记为小修改', '將這些類型的回退標記為小修改'),
+				label: wgULS('将这些类型的回退标记为小修改', '將這些類別的回退標記為小修改'),
 				type: 'set',
-				setValues: { agf: '善意回退', norm: wgULS('常规回退', '正規回退'), vand: wgULS('破坏回退', '破壞回退'), torev: wgULS('“恢复此版本”', '“恢復此版本”') }
+				setValues: { agf: '善意回退', norm: wgULS('常规回退', '常規回退'), vand: wgULS('破坏回退', '破壞回退'), torev: wgULS('“恢复此版本”', '「恢復此版本」') }
 			},
 
 			// TwinkleConfig.watchRevertedPages (array)
 			// What types of actions that should result in forced addition to watchlist
 			{
 				name: 'watchRevertedPages',
-				label: wgULS('把这些类型的回退加入监视列表', '把這些類型的回退加入監視列表'),
+				label: wgULS('把这些类型的回退加入到监视列表', '把這些類別的回退加入到監視清單'),
 				type: 'set',
-				setValues: { agf: '善意回退', norm: wgULS('常规回退', '正規回退'), vand: wgULS('破坏回退', '破壞回退'), torev: wgULS('“恢复此版本”', '“恢復此版本”') }
+				setValues: { agf: '善意回退', norm: wgULS('常规回退', '常規回退'), vand: wgULS('破坏回退', '破壞回退'), torev: wgULS('“恢复此版本”', '「恢復此版本」') }
+			},
+			// TwinkleConfig.watchRevertedExpiry
+			// If any of the above items are selected, whether to expire the watch
+			{
+				name: 'watchRevertedExpiry',
+				label: wgULS('当回退页面时，加入到监视列表的期限', '當回退頁面時，加入到監視清單的期限'),
+				type: 'enum',
+				enumValues: Twinkle.config.watchlistEnums
 			},
 
 			// TwinkleConfig.offerReasonOnNormalRevert (boolean)
 			// If to offer a prompt for extra summary reason for normal reverts, default to true
 			{
 				name: 'offerReasonOnNormalRevert',
-				label: wgULS('常规回退时询问理由', '正規回退時詢問理由'),
-				helptip: wgULS('“常规”回退是中间的那个[回退]链接。', '“常規”回退是中間的那個[回退]連結。'),
+				label: wgULS('常规回退时询问理由', '常規回退時詢問理由'),
+				helptip: wgULS('“常规”回退是中间的那个[回退]链接。', '「常規」回退是中間的那個[回退]連結。'),
 				type: 'boolean'
 			},
 
 			{
 				name: 'confirmOnFluff',
-				label: wgULS('回退前要求确认', '回退前要求確認'),
-				helptip: wgULS('给那些手持设备的用户，或者意志不坚定的。', '給那些手持設備的用戶，或者意志不堅定的。'),
+				label: wgULS('回退前要求确认（所有设备）', '回退前要求確認（所有裝置）'),
+				helptip: wgULS('对于使用移动设备的用户，或者意志不坚定的。', '對於使用行動裝置的使用者，或者意志不堅定的。'),
+				type: 'boolean'
+			},
+
+			{
+				name: 'confirmOnMobileFluff',
+				label: wgULS('回退前要求确认（仅移动设备）', '回退前要求確認（僅行動裝置）'),
+				helptip: wgULS('避免在移动设备意外执行回退。', '避免在行動裝置意外執行回退。'),
 				type: 'boolean'
 			},
 
 			// TwinkleConfig.showRollbackLinks (array)
-			// Where Twinkle should show rollback links (diff, others, mine, contribs)
+			// Where Twinkle should show rollback links:
+			// diff, others, mine, contribs, history, recent
 			// Note from TTO: |contribs| seems to be equal to |others| + |mine|, i.e. redundant, so I left it out heres
 			{
 				name: 'showRollbackLinks',
 				label: wgULS('在这些页面上显示回退链接', '在這些頁面上顯示回退連結'),
 				type: 'set',
-				setValues: { diff: wgULS('差异', '差異'), others: wgULS('其它用户的贡献', '其他用戶的貢獻'), mine: wgULS('我的贡献', '我的貢獻') }
+				setValues: { diff: wgULS('差异', '差異'), history: wgULS('历史记录', '歷史記錄'), others: wgULS('其它用户的贡献', '其它使用者的貢獻'), mine: wgULS('我的贡献', '我的貢獻'), recentchanges: wgULS('最近更改', '近期變更'), recentchangeslinked: wgULS('相关更改', '相關變更') }
+			},
+			{
+				name: 'customRevertSummary',
+				label: '回退理由',
+				helptip: wgULS('在查看差异时可选，仅善意回退、常规回退、恢复此版本', '在檢視差異時可選，僅善意回退、常規回退、恢復此版本'),
+				type: 'customList',
+				customListValueTitle: '理由',
+				customListLabelTitle: wgULS('显示的文字', '顯示的文字')
 			}
 		]
 	},
@@ -1515,7 +1567,7 @@ Twinkle.config.saveSuccess = function twinkleconfigSaveSuccess(pageobj) {
 	pageobj.getStatusElement().info('成功');
 
 	var noticebox = document.createElement('div');
-	noticebox.className = 'successbox';
+	noticebox.className = 'mw-message-box mw-message-box-success';
 	noticebox.style.fontSize = '100%';
 	noticebox.style.marginTop = '2em';
 	noticebox.innerHTML = wgULS('<p><b>您的Twinkle参数设置已被保存。</b></p><p>要看到这些更改，您可能需要<a href="', '<p><b>您的Twinkle參數設置已被保存。</b></p><p>要看到這些更改，您可能需要<a href="') + mw.util.getUrl('w:WP:BYPASS') + wgULS('" title="w:WP:BYPASS"><b>绕过浏览器缓存</b></a>。</p>', '" title="w:WP:BYPASS"><b>繞過瀏覽器緩存</b></a>。 </p>');

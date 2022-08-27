@@ -11,19 +11,19 @@
 
 /* Morebits.status */
 
-.tw_status_status {
+.morebits_status_status {
 	color: #4682B4;
 }
 
-.tw_status_info {
+.morebits_status_info {
 	color: #228B22;
 }
 
-.tw_status_warn {
+.morebits_status_warn {
 	color: #FF4500;
 }
 
-.tw_status_error {
+.morebits_status_error {
 	color: #FF4500;
 	font-weight: bold;
 }
@@ -41,7 +41,6 @@ form.quickform
 form.quickform *
 {
 	font-family: sans-serif;
-	vertical-align: middle;
 }
 
 form.quickform fieldset
@@ -67,10 +66,26 @@ form.quickform select
 	margin-left: .2em;
 }
 
+form.quickform input[type=checkbox],
+form.quickform input[type=radio] {
+	height: 13px;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	padding: 0;
+	width: 13px;
+	vertical-align: top;
+}
+
+form.quickform div {
+	line-height: 18px;
+}
+
 form.quickform h5
 {
 	margin: .5em 0 0;
 	padding: .3em .2em .2em;
+	font-size: 108%; /* 100% is 12px => 108% is 12.96px */
 }
 
 /* only give the top border to headers with something above them */
@@ -91,10 +106,7 @@ form.quickform input:disabled + label
 	color: gray;
 }
 
-form.quickform span.quickformDescription
-{
-	font-style: italic;
-}
+/* zhwiki: no italic for quickformDescription */
 
 form.quickform .quickformSubgroup
 {
@@ -102,18 +114,18 @@ form.quickform .quickformSubgroup
 	margin-left: 3em;
 }
 
-form.quickform .tooltipButtonContainer
+/* The tooltip button and the content itself */
+form.quickform .morebits-tooltipButton
 {
-	position: relative;
-	width: 100%;
-}
-
-form.quickform .tooltipButton
-{
-	color: blue;
+	color: mediumblue;
 	font-weight: bold;
 	cursor: help;
-	padding: .2em;
+	padding: .3em;
+}
+.morebits-ui-tooltip
+{
+	padding: 4px 6px 4px 6px;
+	font-size: 13px;
 }
 
 
@@ -165,73 +177,36 @@ div.morebits-previewbox .mw-editsection
 }
 
 
-
-
-/* Portlet */
-
-.skin-modern #mw_contentwrapper div.portlet {
-	overflow: hidden;
-	height: 1.5em;
-	margin: 0 0 0 14em;
-	padding: 0;
-}
-
-.skin-modern #mw_contentwrapper div.portlet h5 {
-	display: none;
-}
-
-.skin-modern #mw_contentwrapper div.portlet div.pbody {
-	margin: 0;
-	padding: 0;
-}
-
-.skin-modern #mw_contentwrapper div.portlet div.pbody ul {
-	display: inline;
-	margin: 0;
-}
-
-.skin-modern #mw_contentwrapper div.portlet div.pbody ul li {
-	display: block;
-	float: left;
-	height: 1.5em;
-	margin: 0 .5em;
-	padding: 0 .2em;
-	text-transform: lowercase;
-}
-
-.skin-modern #mw_contentwrapper div.portlet div.pbody ul li a {
-	text-decoration: underline;
-}
-
-.skin-modern #mw_contentwrapper div.portlet div.pbody ul li.selected a {
-	text-decoration: none;
-}
-
-
 /* Morebits.simpleWindow */
 
 .morebits-dialog {
 	border: 1px #666 solid;
-	font: small sans-serif;
-	background-color: #F0F8FF !important;
-	background-image: none !important;
+	font-family: sans-serif;
+	background-color: #F0F8FF;
+	background-image: none;
 }
 
-body.skin-monobook .morebits-dialog {
-	font-size: 125%;
+/* px translations in comments are w.r.t standard browser settings,
+   in other settings, the sizes would be scaled accordingly */
+.skin-vector .morebits-dialog {
+	font-size: 75%; /* 100% is 16px => 75% is 12px */
+}
+.skin-timeless .morebits-dialog {
+	font-size: 79%; /* 100% is 15.2px => 79% is 12.008px */
+}
+.skin-monobook .morebits-dialog,
+.skin-modern .morebits-dialog {
+	font-size: 120%; /* 100% is 10px => 120% is 12px */
 }
 
 body .ui-dialog.morebits-dialog .ui-dialog-titlebar {
 	height: 1em;
-	background: repeat-x 50% 80% #cfd6e1 !important;  /* the actual image is specified in morebits.js - ResourceLoader mangles data: URIs in CSS */
-	font: bold 1em sans-serif;
+	background-color: #BCCADF !important;
+	background-image: none !important;
+	font: bold 108% sans-serif; /* 100% is 12px (from above) => 108% is 12.96px */
 	overflow: hidden;
 	padding: .4em .3em .5em !important;
 	white-space: nowrap;
-}
-
-body.skin-monobook .morebits-dialog .ui-dialog-titlebar {
-	line-height: 1em;
 }
 
 .morebits-dialog-scriptname {
@@ -251,7 +226,6 @@ body.skin-monobook .morebits-dialog .ui-dialog-titlebar {
 }
 
 .ui-dialog.morebits-dialog .morebits-dialog-content {
-	font-size: 88%;  /* this just seems to be traditional - I don't quite see the point, in this day and age of huge monitors, etc. */
 	padding: 0;
 }
 
@@ -268,8 +242,12 @@ body .ui-dialog.morebits-dialog .ui-dialog-buttonpane button {
 	cursor: auto;
 }
 
+.morebits-dialog-buttons {
+	font-size: 108%; /* 100% is 12px => 108% is 12.96px */
+}
+
 .morebits-dialog-footerlinks {
-	font-size: 90%;
+	font-size: 97%; /* 100% is 12px (from above) => 97% is 11.64px */
 	float: right;
 	margin: .7em .4em 0 0;
 }
@@ -282,8 +260,8 @@ body .ui-dialog.morebits-dialog .morebits-dialog-footerlinks a {
 	margin: .1em .4em -.2em 0;
 }
 
-.ui-dialog.morebits-dialog a, .ui-dialog.morebits-dialog .ui-widget-content a {
-	color: #0645AD;  /* jQuery imposes a ridiculous nearly-black colour on <a> tags... I don't understand it */
+.ui-icon {
+	vertical-align: -3px;
 }
 
 .ui-icon-inline {

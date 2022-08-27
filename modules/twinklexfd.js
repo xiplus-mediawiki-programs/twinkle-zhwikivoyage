@@ -152,7 +152,7 @@ Twinkle.xfd.callback.change_category = function twinklexfdCallbackChangeCategory
 Twinkle.xfd.callbacks = {
 	vfd: {
 		main: function(pageobj) {
-			// this is coming in from lookupCreator...!
+			// this is coming in from lookupCreation...!
 			var params = pageobj.getCallbackParameters();
 			// var initialContrib = pageobj.getCreator();
 			// params.uploader = initialContrib;
@@ -274,7 +274,7 @@ Twinkle.xfd.callback.evaluate = function(e) {
 			// Contributor specific edits
 			wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'));
 			wikipedia_page.setCallbackParameters(params);
-			wikipedia_page.lookupCreator(Twinkle.xfd.callbacks.vfd.main);
+			wikipedia_page.lookupCreation(Twinkle.xfd.callbacks.vfd.main);
 
 			Morebits.wiki.removeCheckpoint();
 			break;
