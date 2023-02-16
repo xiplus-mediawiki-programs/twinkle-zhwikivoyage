@@ -132,7 +132,6 @@ Twinkle.welcome.callback = function friendlywelcomeCallback(uid) {
 		list: [
 			{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !mw.util.isIPAddress(mw.config.get('wgTitle')) },
 			{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: mw.util.isIPAddress(mw.config.get('wgTitle')) },
-			{ type: 'option', value: 'wikiProject', label: wgULS('远征队相关欢迎模板', '遠征隊相關歡迎模板') },
 			{ type: 'option', value: 'nonChinese', label: wgULS('非中文欢迎模板', '非中文歡迎模板') }
 		]
 	});
@@ -209,18 +208,12 @@ Twinkle.welcome.populateWelcomeList = function(e) {
 				'welcome',
 				'wikipedian'
 			]);
-			container.append({ type: 'header', label: wgULS('问题用户欢迎模板', '問題用戶歡迎模板') });
-			appendTemplates([]);
 			break;
 		case 'anonymous':
 			container.append({ type: 'header', label: wgULS('匿名用户欢迎模板', '匿名用戶歡迎模板') });
 			appendTemplates([
 				'welcomeanon'
 			]);
-			break;
-		case 'wikiProject':
-			container.append({ type: 'header', label: wgULS('远征队相关欢迎模板', '遠征隊相關歡迎模板') });
-			appendTemplates([]);
 			break;
 		case 'nonChinese':
 			container.append({ type: 'header', label: wgULS('非中文欢迎模板', '非中文歡迎模板') });
