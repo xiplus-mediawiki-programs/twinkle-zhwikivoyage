@@ -130,8 +130,8 @@ Twinkle.welcome.callback = function friendlywelcomeCallback(uid) {
 		label: wgULS('欢迎的类型：', '歡迎的類型：'),
 		event: Twinkle.welcome.populateWelcomeList,
 		list: [
-			{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !Morebits.isIPAddress(mw.config.get('wgTitle')) },
-			{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: Morebits.isIPAddress(mw.config.get('wgTitle')) },
+			{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !mw.util.isIPAddress(mw.config.get('wgTitle')) },
+			{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: mw.util.isIPAddress(mw.config.get('wgTitle')) },
 			{ type: 'option', value: 'wikiProject', label: wgULS('远征队相关欢迎模板', '遠征隊相關歡迎模板') },
 			{ type: 'option', value: 'nonChinese', label: wgULS('非中文欢迎模板', '非中文歡迎模板') }
 		]
