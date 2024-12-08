@@ -438,9 +438,6 @@ Twinkle.load = function () {
 	Twinkle.diff();
 	Twinkle.unlink();
 	Twinkle.config.init();
-	// if (Morebits.userIsInGroup('sysop')) {
-	// 	Twinkle.close();
-	// }
 	// Run the initialization callbacks for any custom modules
 	$(Twinkle.initCallbacks).each(function (k, v) {
 		v();
