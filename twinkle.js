@@ -461,6 +461,8 @@ Twinkle.load = function () {
 		mw.util.addCSS('.morebits-dialog-content, .morebits-dialog-footerlinks { font-size: 100% !important; } ' +
 			'.morebits-dialog input, .morebits-dialog select, .morebits-dialog-content button { font-size: inherit !important; }');
 	}
+
+	mw.hook('twinkle.loaded').fire(Twinkle);
 };
 
 }(window, document, jQuery)); // End wrap with anonymous function
