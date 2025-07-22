@@ -124,14 +124,17 @@ Twinkle.welcome.callback = function friendlywelcomeCallback(uid) {
 
 	var form = new Morebits.quickForm(Twinkle.welcome.callback.evaluate);
 
+	var relevantUserName = mw.config.get('wgRelevantUserName');
+	var isAnonUser = mw.util.isTemporaryUser(relevantUserName) || mw.util.isIPAddress(relevantUserName);
+
 	form.append({
 		type: 'select',
 		name: 'type',
 		label: wgULS('欢迎的类型：', '歡迎的類型：'),
 		event: Twinkle.welcome.populateWelcomeList,
 		list: [
-			{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !mw.util.isIPAddress(mw.config.get('wgTitle')) },
-			{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: mw.util.isIPAddress(mw.config.get('wgTitle')) },
+			{ type: 'option', value: 'standard', label: wgULS('常规欢迎模板', '正規歡迎模板'), selected: !isAnonUser },
+			{ type: 'option', value: 'anonymous', label: wgULS('匿名用户欢迎模板', '匿名用户歡迎模板'), selected: isAnonUser },
 			{ type: 'option', value: 'nonChinese', label: wgULS('非中文欢迎模板', '非中文歡迎模板') }
 		]
 	});
