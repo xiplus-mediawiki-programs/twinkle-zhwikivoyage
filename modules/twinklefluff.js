@@ -457,7 +457,7 @@ Twinkle.fluff.callbacks = {
 			return;
 		}
 
-		var summary = Twinkle.fluff.formatSummary(wgULS('回退到由$USER做出的修订版本', '回退到由$USER做出的修訂版本') + revertToRevID,
+		var summary = Twinkle.fluff.formatSummary(wgULS('回退到由$USER做出的修订版本', '回退到由$USER做出的修訂版本') + '[[Special:PermaLink/' + revertToRevID + '|' + revertToRevID + ']]',
 			revertToUserHidden ? null : revertToUser, optional_summary);
 
 		var query = {
