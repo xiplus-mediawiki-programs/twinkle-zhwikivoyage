@@ -1,6 +1,165 @@
 # Review log of upstream commits (xiplus-mediawiki-programs/twinkle).
 # One line per reviewed upstream commit, oldest first, tab-separated:
 #   <upstream short hash>	<status>	<subject>	<note>
-# status: baseline | picked | skipped | empty | diverged
-# The hash on the last line is where the next review starts.
+# status: baseline | picked | skipped | empty | diverged | pending
+# Listing starts from the last baseline and leaves out every hash below.
 775186d	baseline	test: Set window.wgULS	Last commit included in 98caeaa "Update from upstream" (2022-08-27)
+a4f8755	skipped	Fix get_templates	只動到本地沒有的檔案
+9cef42d	skipped	Create check_templates.yml	只動到本地沒有的檔案
+75a8d68	picked	fluff: Fix rollback links for top rev in history	c91c0a8
+856b4a1	picked	morebits: load RL modules required for previews	a040e0a
+1db568f	skipped	close: Adjust button style	只有 close 模組用的 CSS
+eeac9e8	skipped	close: Remove unused spanTag	只動到本地沒有的檔案
+335ad8b	skipped	close: Fix disableLink	只有 close 模組用的 CSS
+196303e	pending	configure eslint to use es6	ESLint 改為 ES6：需確認是否放棄 ES5
+ef63b87	skipped	Remove unused eslint rule	只動到本地沒有的檔案
+8bc4b78	picked	morebits: fix handling of hard errors	e4d480f
+773dd8b	skipped	arv, warn: Rename uaa page	只動到本地沒有的檔案
+f4a9cd7	picked	fix "more" menu's styling in skin vector-2022	f602e2a
+9a8916a	skipped	close: Fix section matching with discussion tools	只動到本地沒有的檔案
+5c2665c	skipped	deps: bump eslint from 7.32.0 to 8.31.0	上游依賴升級
+31393dc	skipped	Delete dependabot.yml	上游 CI 設定
+2ab8c70	skipped	talkback: Update messages (#284)	talkback 用詞修改
+2220ae2	skipped	arv: Move vandal position	只動到本地沒有的檔案
+363a38a	skipped	arv: Add bold markup on vandal	只動到本地沒有的檔案
+6d676ce	skipped	block: Fix closeRequest regex	只動到本地沒有的檔案
+1201b10	skipped	xfd: Remove Afc template	zhwiki AFC 模板，本站無 AFC
+d3409b0	skipped	protect: Use pageNameNorm in the request	只動到本地沒有的檔案
+6f957fe	skipped	protect: Handle page name with equals sign	只動到本地沒有的檔案
+914de99	pending	speedy: Add salting	salting：需確認本站是否有 {{salt}}
+a9dba27	pending	speedy: Lint	914de99 的 lint，隨其決定
+3f7cbb1	skipped	Add Salt to template whitelist	只動到本地沒有的檔案
+ba1fbbc	skipped	block: Add watchBlockNotices config	block 模組設定，本地無 block
+f4bbf78	skipped	block: Update ucblock summary	只動到本地沒有的檔案
+fb415f1	skipped	protect: Add upload protection label	只動到本地沒有的檔案
+738e7b8	skipped	tag: Fix organizations notability label	zhwiki 關注度模板
+6d18e7d	skipped	warn: Change messages.levels structure	只動到本地沒有的檔案
+5da491a	skipped	warn: Add uw-draft	只動到本地沒有的檔案
+ab5b2af	skipped	Update get_templates.py	只動到本地沒有的檔案
+46e42bc	skipped	Upgrade codeql-action	上游 CI 設定
+11ab204	skipped	warn: Fix menu for autolevel	只動到本地沒有的檔案
+cbbfb90	skipped	Upgrade to actions/checkout@v3	上游 CI 設定
+f5634f0	skipped	Set codeql permissions	上游 CI 設定
+08047df	skipped	Update .github from upstream	只動到本地沒有的檔案
+b0f44a9	skipped	Bump deps	上游依賴升級
+0b25dea	skipped	Create dependabot.yml	上游 CI 設定
+1509f15	skipped	ci: always run unit tests	只動到本地沒有的檔案
+e10c787	picked	morebits: stop relying on .toccolours (not available in vector-2022)	a756236
+0a2eba4	picked	Update morebits.css	b93ca86
+03c5582	picked	Add preventDefault to rollback links	c4b17ee
+f75b254	skipped	eslint: disallow nested ternaries	lint 規則調整，行為不變
+fc98966	picked	twinkle: vector-2022: hovering should open menu	e530a17（丟棄 close 的 CSS）
+a9cd084	picked	morebits: Add hidden attr to option	6e40f5b
+cf30e0b	skipped	Fix no-nested-ternary	只動到本地沒有的檔案
+f0084d4	skipped	Add fix-eol command	上游 package.json 指令
+23a5852	skipped	close: Add relist	只動到本地沒有的檔案
+0f970d2	skipped	close: Disallow relist today's items	只動到本地沒有的檔案
+357907d	skipped	speedy: Update criteria description	zhwiki CSD 文字
+81030c4	picked	twinkle.js: fix addPortlet() in vector-2022	b4ca8e9（heading 改用本地的 h3）
+c9fe291	pending	copyvio: Keep salt in page	保留 {{salt}}：隨 914de99 決定
+0646f22	skipped	Improve xfd summary	zhwiki AfD 頁面摘要格式
+abe957d	skipped	Set permissions for workflow	只動到本地沒有的檔案
+5ca4449	pending	Replace wgULS with HanAssist (#301)	HanAssist 重構：需確認本站是否有 ext.gadget.HanAssist
+98e86a6	skipped	Fix get_templates.py	只動到本地沒有的檔案
+bda490d	skipped	Fix i18n.py	只動到本地沒有的檔案
+98d0166	skipped	speedy: Add G18	zhwiki CSD 準則（G18）
+2a87cd9	skipped	Update gadget.txt	gadget.txt 本地自行維護
+3bb0791	skipped	Remove requiresES6	gadget.txt 本地自行維護
+12cc4b0	skipped	close: Fix header parsing	只動到本地沒有的檔案
+ece282f	skipped	close: Ignore discussiontools links	只動到本地沒有的檔案
+0662533	skipped	Upgrade actions deps	上游 CI 設定
+c005f66	skipped	Upgrade actions deps	上游 CI 設定
+c643cf1	skipped	close: Handle new heading HTML	只動到本地沒有的檔案
+fa14f83	skipped	Update gadget.txt	gadget.txt 本地自行維護
+3aa3bcb	skipped	close: Ignore h2 has h3	只動到本地沒有的檔案
+8bad8e1	skipped	close: Disable on vector-2022	只動到本地沒有的檔案
+0aa6125	diverged	xfd: Preload recently used batch reason	本地 xfd 為 VFD 流程，沒有 AfD 批量分類
+402ad94	skipped	Use actions/labeler@v4	只動到本地沒有的檔案
+5c79bbb	skipped	speedy: update R7 rationale (#303)	zhwiki CSD 文字
+3f68528	skipped	close: Replace NavFrame with talkend	只動到本地沒有的檔案
+df91daf	skipped	warn: add uw-paid templates	只動到本地沒有的檔案
+3291ff8	skipped	close: revise regex to match unusual old template	只動到本地沒有的檔案
+fe8d533	skipped	close: wrap new delete template w/ <noinclude>	只動到本地沒有的檔案
+5e704b4	skipped	Remove unused regex s flag	只動到本地沒有的檔案
+194b9f1	skipped	Restore tag variable	只動到本地沒有的檔案
+1241283	diverged	tag: Fix regression leaving generic {{merge}} instead of {{merge to}} or {{merge from}}	本地 tag 沒有 Merge 系列模板的處理
+510b43d	skipped	arv: Update vip and ewip form	只動到本地沒有的檔案
+6e4111e	skipped	Rename notability	zhwiki 關注度方針名稱
+54a10b7	skipped	Update i18n	zhwiki 關注度名稱
+0973bb7	skipped	修正XFD「收錄標準」語病	文字修正（語病）
+5b0f81f	pending	Fix page title not passed into {{Findsources}} if it contains "="	{{Findsources}}：需確認本站 xfd 是否使用
+57f0a1b	skipped	block: identify sppUsername in log entry (#316)	只動到本地沒有的檔案
+584759b	skipped	close: Re-enable on vector-2022 (#317)	只動到本地沒有的檔案
+d0c4074	skipped	warn: add uw-disruptive	只動到本地沒有的檔案
+44bfc6c	skipped	Check block status change when issuing warning, and vice versa	只動到本地沒有的檔案
+bf9b08f	picked	morebits: create capitalized aliases for classes	9c8e862
+b47c0f7	skipped	capitalize Morebits class names	類別名稱大寫的機械式改寫；只取 bf9b08f 的別名
+ed48897	skipped	simplify IIFEs	IIFE 簡化的機械式改寫
+4082fd0	picked	fire mw.hook when Twinkle is loaded	be6c1cf（只取 mw.hook 一行）
+38575f5	skipped	Revert "Check block status change when issuing warning, and vice versa (#319)"	只動到本地沒有的檔案
+ccd1dff	skipped	get relevantUser from Morebits directly when fetching userinfo	只動到本地沒有的檔案
+cbedae6	skipped	Check block status change when issuing warning, and vice versa	只動到本地沒有的檔案
+7e238aa	skipped	tag: add {{Unreliable sources}}	zhwiki 模板 {{Unreliable sources}}
+b8331e7	pending	Add footerlink to Twinkle talk page	footer 討論頁連結：需確認本站連結目標
+3d319df	skipped	speedy: update R7 rationale and showInNamespaces	zhwiki CSD 文字
+cf1654d	diverged	xfd: Introduce preview	本地 xfd 為 VFD 流程，結構與上游差異大
+9e1026a	skipped	Allow filling in wikitexts for {{uw-username}}	只動到本地沒有的檔案
+bc30e1f	skipped	update csd rationales	zhwiki CSD 文字
+41e5139	empty	remove unused eslint-disable directive (#337)	本地沒有該註解
+d247e65	skipped	Remove "deliberately" from uw-error (#339)	只動到本地沒有的檔案
+30865c8	skipped	Partially revert "close: revise regex to match unusual old template" (#345)	只動到本地沒有的檔案
+349b28c	skipped	Set user-agent	只動到本地沒有的檔案
+d12e034	picked	welcome: Check for temporary user in welcoming form	85570de（保留本地標籤文字）
+122c661	skipped	welcome: Change the description from "ip user" to "anonymous user"	用詞修改（ip user → anonymous user）
+6961fa1	skipped	Remove requiresES6	gadget.txt 本地自行維護
+71cdf8b	picked	Remove support for deprecated SD (Flow) page (#346)	5af1d83（手動移植，只改 morebits.js）
+3304ffc	skipped	block: Fix usertalk summary	只動到本地沒有的檔案
+a3af341	skipped	block: add support for action block in partial block (#349)	只動到本地沒有的檔案
+1b9d8cf	skipped	update csd reasons (#352)	zhwiki CSD 文字
+72eef8f	skipped	speedy: update csd rationale (#353)	zhwiki CSD 文字
+0d50f75	diverged	tag: acquire exact talk page name for {{Requested move}} (#354)	本地 tag 沒有 {{Requested move}} 的處理
+2e989b4	skipped	batchdelete: Update PrefixIndex name	只動到本地沒有的檔案
+b1b887d	skipped	speedy: update o1 rationale (#357)	zhwiki CSD 文字
+aa2e8ff	skipped	close: wrap {{Findsources}} into request itself instead of comment	只動到本地沒有的檔案
+5d56797	skipped	update csd reasons	zhwiki CSD 文字
+4ee6bda	skipped	speedy: update Fn rationale	zhwiki CSD 文字
+ed5d7e3	skipped	speedy: update An rationale	zhwiki CSD 文字
+c38ea10	skipped	update On&Un rationale	zhwiki CSD 文字
+c959111	skipped	speedy: update Gx rationale	zhwiki CSD 文字
+b0b32cd	skipped	image: update f4, f8	只動到本地沒有的檔案
+ce359d2	skipped	arv: prompt for confirmation before submitting 0-edit account to uaa	只動到本地沒有的檔案
+7613ff9	picked	twinkle.js: allow to load at Special:IPContributions (#362)	ff4f4c8（手動移植到本地的 isSpecialPage 判斷）
+6bed72c	skipped	block: Do not modify legacy IP user's talk page (#366)	只動到本地沒有的檔案
+9723c0b	skipped	twinkle.js: update csd reasons (#367)	zhwiki CSD 文字
+37a4110	picked	Do not modify legacy IP user talk page (#368)	8fffeff（手動移植 talkback、welcome；morebits 部分已被上游撤回）
+ad015b7	skipped	Update modules/twinklearv.js	只動到本地沒有的檔案
+7f81cee	skipped	block: choose to RFDR when block user with adv. right (#363)	只動到本地沒有的檔案
+2fc8bbf	skipped	Update i18n.py	只動到本地沒有的檔案
+28aa5e6	skipped	close: never display the actual deletion option to non-sysops	只動到本地沒有的檔案
+6ef42a3	skipped	block: temporary account enhancement (#365)	只動到本地沒有的檔案
+19a4744	skipped	block: add prefix for custom dates in summary and comment when closeRequest	只動到本地沒有的檔案
+f4be952	skipped	Disallow non-sysops from deselecting noop in the deletion options	只動到本地沒有的檔案
+72265dd	skipped	block: fix undefined variable (#371)	只動到本地沒有的檔案
+36ac888	skipped	block: fix undefined variable (#372)	只動到本地沒有的檔案
+0093128	skipped	arv: Use level-2 headings for VIP/ANM/EWIP (#374)	只動到本地沒有的檔案
+69f2eaf	skipped	block: Recognize 2nd-level headings in closing VIP requests (#377)	只動到本地沒有的檔案
+547cc1d	skipped	update csd reasons (#378)	zhwiki CSD 文字
+0eb0ebe	skipped	block: use <nowiki> to wrap the reason while submitting RFDR (#380)	只動到本地沒有的檔案
+84d7ad6	empty	morebits: allow csd request on legacy IP user talk page (#382)	morebits 的檢查已被 0c06ad3 撤回，淨效果為零
+9aa3f32	skipped	speedy: required draft page name in G19 (#383)	zhwiki CSD 準則（G19）
+f31b74d	skipped	block: fix rfdr report signature (#384)	只動到本地沒有的檔案
+3d9ec49	skipped	block: Fix broken nowiki tag on wiki	只動到本地沒有的檔案
+0c06ad3	empty	Do not edit legacy IP user talk page (#387)	淨效果已併入 37a4110 和 397ad76 的移植
+26c0cfe	empty	welcome: fix to disable on legacy ip (#388)	還原 0c06ad3 對 welcome 的改動，淨效果為零
+397ad76	picked	Do not edit legacy IP page (#389)	dbf63e9（手動移植 copyvio、speedy；本地 xfd 不發通知）
+7ba280b	skipped	block: default not to rfdr (#390)	只動到本地沒有的檔案
+2943398	skipped	speedy: removed a6 (#391)	zhwiki CSD 準則（移除 A6）
+2fe473e	picked	twinkle.css: update onsite fix (#392)	a07e08c
+7dfefbb	skipped	warn: add uw-ai template (#393)	只動到本地沒有的檔案
+e7e2396	skipped	batchdelete: use half colon (#394)	只動到本地沒有的檔案
+e6d7844	skipped	speedy: use half colon (#395)	文字修正（半形冒號）
+d74a785	diverged	speedy: display templateModuleList (#396)	本地 speedy 結構與上游差異大（無 templateModuleList）
+154ca86	skipped	close: remove trailing pipe (#397)	只動到本地沒有的檔案
+53f903b	skipped	speedy: update g21 rationale (#398)	zhwiki CSD 文字
+b5cb0dc	skipped	speedy: update csd reasons (#399)	zhwiki CSD 文字
+a72528b	picked	fluff: add link to PermaLink when show exact #rev (#402)	2f90bac（保留本地 wgULS）
