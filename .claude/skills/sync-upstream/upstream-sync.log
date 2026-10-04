@@ -55,7 +55,7 @@ f0084d4	skipped	Add fix-eol command	上游 package.json 指令
 23a5852	skipped	close: Add relist	只動到本地沒有的檔案
 0f970d2	skipped	close: Disallow relist today's items	只動到本地沒有的檔案
 357907d	skipped	speedy: Update criteria description	zhwiki CSD 文字
-81030c4	picked	twinkle.js: fix addPortlet() in vector-2022	b4ca8e9（heading 改用本地的 h3）
+81030c4	picked	twinkle.js: fix addPortlet() in vector-2022	b4ca8e9（heading 改用 f034645 的 label）
 c9fe291	pending	copyvio: Keep salt in page	保留 {{salt}}：隨 914de99 決定
 0646f22	skipped	Improve xfd summary	zhwiki AfD 頁面摘要格式
 abe957d	skipped	Set permissions for workflow	只動到本地沒有的檔案
@@ -164,3 +164,4 @@ d74a785	diverged	speedy: display templateModuleList (#396)	本地 speedy 結構�
 b5cb0dc	skipped	speedy: update csd reasons (#399)	zhwiki CSD 文字
 a72528b	picked	fluff: add link to PermaLink when show exact #rev (#402)	2f90bac（保留本地 wgULS）
 477015f	picked	twinkle,twinkleconfig: add support for vector-2022	464c3c3；baseline 前的 commit，先前只同步了一部分，補上 defaultConfig 的 vector-2022 和 twinkleconfig 的皮膚清單
+f034645	picked	twinkle: fix menu appearance for skin vector-2022	4c13704；baseline 前的 commit，先前未同步，導致 vector-2022 的 TW 標題用 h3 而字體過大
