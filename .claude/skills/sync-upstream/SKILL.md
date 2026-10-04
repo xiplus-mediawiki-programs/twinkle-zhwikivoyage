@@ -53,7 +53,7 @@ bash .claude/skills/sync-upstream/scripts/list-new-commits.sh
 
 每行輸出包含 hash、日期、標題、**本地存在的檔案**、**本地不存在的檔案**。
 
-也看一下紀錄檔裡的 `pending`，問使用者這次要不要決定：`grep -P '\tpending\t' .claude/skills/sync-upstream/upstream-sync.log`
+也看一下紀錄檔裡的 `pending`，問使用者這次要不要決定：`awk -F'\t' '$2=="pending"' .claude/skills/sync-upstream/upstream-sync.log`
 
 ### 2. 分類
 
