@@ -163,3 +163,4 @@ d74a785	diverged	speedy: display templateModuleList (#396)	本地 speedy 結構�
 53f903b	skipped	speedy: update g21 rationale (#398)	zhwiki CSD 文字
 b5cb0dc	skipped	speedy: update csd reasons (#399)	zhwiki CSD 文字
 a72528b	picked	fluff: add link to PermaLink when show exact #rev (#402)	2f90bac（保留本地 wgULS）
+477015f	picked	twinkle,twinkleconfig: add support for vector-2022	464c3c3；baseline 前的 commit，先前只同步了一部分，補上 defaultConfig 的 vector-2022 和 twinkleconfig 的皮膚清單
