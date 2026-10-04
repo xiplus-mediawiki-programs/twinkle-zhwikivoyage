@@ -693,6 +693,9 @@ Twinkle.speedy.callbacks = {
 					} else if (initialContrib === mw.config.get('wgTitle') && mw.config.get('wgNamespaceNumber') === 3) {
 						Morebits.status.warn(wgULS('通知页面创建者：用户创建了自己的对话页', '通知頁面創建者：用戶創建了自己的對話頁'));
 
+					} else if (mw.util.isIPAddress(initialContrib)) {
+						Morebits.status.info(wgULS('通知页面创建者：IP用户创建了该页，跳过通知', '通知頁面創建者：IP用戶創建了該頁，跳過通知'));
+
 					} else {
 						var usertalkpage = new Morebits.wiki.page('User talk:' + initialContrib, wgULS('通知页面创建者（', '通知頁面創建者（') + initialContrib + '）'),
 							notifytext, i;

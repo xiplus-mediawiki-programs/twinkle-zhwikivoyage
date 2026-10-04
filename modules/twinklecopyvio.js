@@ -76,23 +76,27 @@ Twinkle.copyvio.callbacks = {
 		// Notification to first contributor
 		if (params.usertalk) {
 			var usertalkpage = new Morebits.wiki.page('User talk:' + initialContrib, wgULS('通知页面创建者（', '通知页面创建者（') + initialContrib + '）');
-			var notifytext = '\n{{subst:CopyvioNotice|' + mw.config.get('wgPageName') + '}}';
-			usertalkpage.setAppendText(notifytext);
-			usertalkpage.setEditSummary(wgULS('通知：页面[[', '通知：頁面[[') + mw.config.get('wgPageName') + wgULS(']]疑似侵犯版权', ']]疑似侵犯版權') + Twinkle.getPref('summaryAd'));
-			usertalkpage.setCreateOption('recreate');
-			switch (Twinkle.getPref('copyvioWatchUser')) {
-				case 'yes':
-					usertalkpage.setWatchlist(true);
-					break;
-				case 'no':
-					usertalkpage.setWatchlistFromPreferences(false);
-					break;
-				default:
-					usertalkpage.setWatchlistFromPreferences(true);
-					break;
+			if (mw.util.isIPAddress(initialContrib, false)) {
+				usertalkpage.getStatusElement().info(wgULS('IP用户创建了该页，跳过通知。', 'IP用戶創建了該頁，跳過通知。'));
+			} else {
+				var notifytext = '\n{{subst:CopyvioNotice|' + mw.config.get('wgPageName') + '}}';
+				usertalkpage.setAppendText(notifytext);
+				usertalkpage.setEditSummary(wgULS('通知：页面[[', '通知：頁面[[') + mw.config.get('wgPageName') + wgULS(']]疑似侵犯版权', ']]疑似侵犯版權') + Twinkle.getPref('summaryAd'));
+				usertalkpage.setCreateOption('recreate');
+				switch (Twinkle.getPref('copyvioWatchUser')) {
+					case 'yes':
+						usertalkpage.setWatchlist(true);
+						break;
+					case 'no':
+						usertalkpage.setWatchlistFromPreferences(false);
+						break;
+					default:
+						usertalkpage.setWatchlistFromPreferences(true);
+						break;
+				}
+				usertalkpage.setFollowRedirect(true);
+				usertalkpage.append();
 			}
-			usertalkpage.setFollowRedirect(true);
-			usertalkpage.append();
 		}
 	},
 	taggingArticle: function(pageobj) {
