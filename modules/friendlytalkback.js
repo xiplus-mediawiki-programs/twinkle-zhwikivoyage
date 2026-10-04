@@ -16,7 +16,7 @@
 
 Twinkle.talkback = function() {
 
-	if (!mw.config.get('wgRelevantUserName')) {
+	if (!mw.config.get('wgRelevantUserName') || mw.util.isIPAddress(mw.config.get('wgRelevantUserName'))) {
 		return;
 	}
 

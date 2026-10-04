@@ -85,8 +85,8 @@ Twinkle.welcome.normal = function() {
 			}
 		}
 	}
-	if (mw.config.get('wgNamespaceNumber') === 3) {
-		var username = mw.config.get('wgTitle').split('/')[0].replace(/"/, '\\"'); // only first part before any slashes
+	var username = mw.config.get('wgTitle').split('/')[0].replace(/"/, '\\"'); // only first part before any slashes
+	if (mw.config.get('wgNamespaceNumber') === 3 && !mw.util.isIPAddress(username)) {
 		Twinkle.addPortletLink(function() {
 			Twinkle.welcome.callback(username);
 		}, wgULS('欢迎', '歡迎'), 'friendly-welcome', wgULS('欢迎用户', '歡迎用戶'));
