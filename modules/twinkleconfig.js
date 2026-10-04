@@ -130,16 +130,6 @@ Twinkle.config.sections = [
 				type: 'string'
 			},
 
-			// TwinkleConfig.protectionSummaryAd (string)
-			// Text to be appended to the edit summary of page protections made using Twinkle
-			{
-				name: 'protectionSummaryAd',
-				label: wgULS('保护摘要后缀', '保護摘要後綴'),
-				helptip: wgULS('通常和编辑摘要后缀一样。', '通常和編輯摘要後綴一樣。'),
-				adminOnly: true,
-				type: 'string'
-			},
-
 			// TwinkleConfig.userTalkPageMode may take arguments:
 			// 'window': open a new window, remember the opened window
 			// 'tab': opens in a new tab, if possible.

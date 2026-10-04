@@ -460,7 +460,6 @@ twinkle.js
   lib/select2.min.js
   lib/select2.min.css
   modules/twinkleconfig.js
-  modules/twinkleclose.js
   modules/twinklecopyvio.js
   modules/twinklediff.js
   modules/twinklefluff.js
