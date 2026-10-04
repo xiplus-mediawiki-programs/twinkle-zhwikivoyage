@@ -1,0 +1,6 @@
+# Review log of upstream commits (xiplus-mediawiki-programs/twinkle).
+# One line per reviewed upstream commit, oldest first, tab-separated:
+#   <upstream short hash>	<status>	<subject>	<note>
+# status: baseline | picked | skipped | empty | diverged
+# The hash on the last line is where the next review starts.
+775186d	baseline	test: Set window.wgULS	Last commit included in 98caeaa "Update from upstream" (2022-08-27)
